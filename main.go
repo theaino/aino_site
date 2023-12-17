@@ -18,11 +18,7 @@ func main() {
     log.Panic(err)
   }
   db.Migrate()
-  pager, err := db.FetchPager()
-  if err != nil {
-    log.Panic(err)
-  }
-  s := server.NewServer()
-  s.LoadPager(pager)
+  s := server.NewServer(db, conf)
+  s.SetupManualPages()
   s.Run(":8000")
 }

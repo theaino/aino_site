@@ -1,5 +1,10 @@
 package server
 
+import (
+	"aino-spring.com/aino_site/config"
+	"aino-spring.com/aino_site/database"
+)
+
 type Pager map[string]string
 
 func NewPager() *Pager {
@@ -21,5 +26,13 @@ func (pager *Pager) GetPaths() (paths []string) {
 
 func (pager *Pager) AddPage(path string, template string) {
   (*pager)[path] = template
+}
+
+func NewPagerFromDBPages(conf *config.Config, pages []database.Page) *Pager {
+  pager := NewPager()
+  for _, page := range pages {
+    pager.AddPage(page.GetCompletePath(conf), page.Template)
+  }
+  return pager
 }
 

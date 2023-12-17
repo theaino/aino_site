@@ -1,0 +1,13 @@
+{{ define "post" }}
+
+{{ template "header" . }}
+
+<a href="/posts"><button>&lt;</button></a>
+
+<h1>{{ .post.Title }}</h1>
+<p>{{ .post.Date }}</p>
+<p>{{ .post.Contents }}</p>
+
+{{ template "footer" . }}
+
+{{ end }}

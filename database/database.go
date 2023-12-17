@@ -2,7 +2,6 @@ package database
 
 import (
 	"aino-spring.com/aino_site/config"
-	"aino-spring.com/aino_site/server"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -24,16 +23,24 @@ func NewConnetion(conf *config.Config) (*Connection, error) {
 }
 
 func (connection *Connection) Migrate() {
-  connection.Database.AutoMigrate(&Page{})
+  connection.Database.AutoMigrate(&Page{}, &Post{})
 }
 
-func (connection *Connection) FetchPager() (*server.Pager, error) {
-  pager := server.NewPager()
+func (connection *Connection) FetchPages() ([]Page, error) {
   var pages []Page
   result := connection.Database.Find(&pages)
-  for _, page := range pages {
-    pager.AddPage(page.GetCompletePath(connection.Config), page.Template)
-  }
-  return pager, result.Error
+  return pages, result.Error
+}
+
+func (connection *Connection) FetchPosts() ([]Post, error) {
+  var posts []Post
+  result := connection.Database.Find(&posts)
+  return posts, result.Error
+}
+
+func (connection *Connection) FetchPost(id string) (Post, error) {
+  var post Post
+  result := connection.Database.First(&post, id)
+  return post, result.Error
 }
 

@@ -1,9 +1,9 @@
 {{ define "not-found" }}
-<html>
-  {{ template "Header" }}
-  <body>
-    404 not found!
-    {{ template "Footer" }}
-  </body>
-</html>
+
+{{ template "header" (dict "title" "Not found!") }}
+
+<h1>404 Not Found!</h1>
+
+{{ template "footer" . }}
+
 {{ end }}
