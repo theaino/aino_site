@@ -8,7 +8,8 @@ import (
 
 type Config struct {
   MysqlDsn string `yaml:"mysql_dsn"`
-  AdminPath string `yaml:"admin_path"`
+  AdminPassword string `yaml:"admin_password"`
+  SessionSecret string `yaml:"session_secret"`
 }
 
 func LoadConfig(path string) (*Config, error) {

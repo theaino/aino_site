@@ -1,11 +1,15 @@
 package server
 
 import (
-	"aino-spring.com/aino_site/config"
 	"aino-spring.com/aino_site/database"
 )
 
-type Pager map[string]string
+type PagerEntry struct {
+  Template string
+  IsAdmin bool
+}
+
+type Pager map[string]PagerEntry
 
 func NewPager() *Pager {
   pager := make(Pager)
@@ -13,7 +17,11 @@ func NewPager() *Pager {
 }
 
 func (pager *Pager) GetTemplate(path string) string {
-  return (*pager)[path]
+  return (*pager)[path].Template
+}
+
+func (pager *Pager) IsAdmin(path string) bool {
+  return (*pager)[path].IsAdmin
 }
 
 func (pager *Pager) GetPaths() (paths []string) {
@@ -24,14 +32,14 @@ func (pager *Pager) GetPaths() (paths []string) {
   return
 }
 
-func (pager *Pager) AddPage(path string, template string) {
-  (*pager)[path] = template
+func (pager *Pager) AddPage(path, template string, isAdmin bool) {
+  (*pager)[path] = PagerEntry{Template: template, IsAdmin: isAdmin}
 }
 
-func NewPagerFromDBPages(conf *config.Config, pages []database.Page) *Pager {
+func NewPagerFromDBPages(pages []database.Page) *Pager {
   pager := NewPager()
   for _, page := range pages {
-    pager.AddPage(page.GetCompletePath(conf), page.Template)
+    pager.AddPage(page.GetCompletePath(), page.Template, page.IsAdminPage)
   }
   return pager
 }

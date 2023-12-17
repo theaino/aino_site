@@ -4,11 +4,9 @@
 
 {{ range $index, $post := .posts }}
 
-<a href="/posts/{{ $post.ID }}">
-  <div>
-    <h2>{{ $post.Title }}</h2>
-    <p>{{ $post.Contents }}</p>
-  </div>
+<a class="post-card" href="/posts/{{ $post.ID }}">
+  <h2>{{ $post.Title }}</h2>
+  <p>{{ $post.Abstract }}</p>
 </a>
 
 {{ end }}

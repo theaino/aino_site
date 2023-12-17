@@ -9,6 +9,8 @@ import (
 
 	"aino-spring.com/aino_site/config"
 	"aino-spring.com/aino_site/database"
+  "github.com/gin-contrib/sessions"
+  "github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
@@ -26,6 +28,9 @@ func NewServer(db *database.Connection, conf *config.Config) *Server {
   server.Config = conf
 
   server.Router = gin.Default()
+
+  store := cookie.NewStore([]byte(conf.SessionSecret))
+  server.Router.Use(sessions.Sessions("ainosession", store))
 
   server.Router.SetFuncMap(template.FuncMap{
     "dict": func(values ...interface{}) (map[string]interface{}, error) {
@@ -50,7 +55,7 @@ func NewServer(db *database.Connection, conf *config.Config) *Server {
   if err != nil {
     log.Panic(err)
   }
-  pager := NewPagerFromDBPages(server.Config, pages)
+  pager := NewPagerFromDBPages(pages)
   server.LoadPager(pager)
 
   server.Router.Static("/static", "static")
@@ -75,8 +80,27 @@ func (server *Server) SetupManualPages() {
       c.Redirect(http.StatusMovedPermanently, "/posts")
       return
     }
-    c.HTML(http.StatusOK, "post", server.GetValues("post", gin.H{"post": post}))
+    postMap := gin.H{"id": id, "title": post.Title, "date": post.Date, "abstract": post.Abstract, "contents": template.HTML(post.Contents), "public": post.Public}
+    c.HTML(http.StatusOK, "post", server.GetValues("post", gin.H{"post": postMap}))
   })
+}
+
+func (server *Server) IsAuthed(c *gin.Context) bool {
+  queryPassword := c.Query("password")
+  session := sessions.Default(c)
+  sessionPassword := session.Get("password")
+  log.Println(queryPassword)
+  log.Println(sessionPassword)
+  if queryPassword == "" && sessionPassword == nil {
+    return false
+  }
+  if queryPassword != "" {
+    isAuthed := queryPassword == server.Config.AdminPassword
+    session.Set("password", queryPassword)
+    session.Save()
+    return isAuthed
+  }
+  return sessionPassword == server.Config.AdminPassword
 }
 
 func (server *Server) GetValues(template string, values gin.H) gin.H {
@@ -94,9 +118,25 @@ func (server *Server) GetHandler(status int, template string, values gin.H) func
   }
 }
 
+func (server *Server) GetAdminHandler(status int, template string, values gin.H) func (*gin.Context) {
+  return func (c *gin.Context) {
+    if server.IsAuthed(c) {
+      c.HTML(http.StatusOK, template, server.GetValues(template, values))
+      return
+    }
+    c.Redirect(http.StatusMovedPermanently, "/login")
+  }
+}
+
 func (server *Server) LoadPager(pager *Pager) {
   for _, path := range pager.GetPaths() {
-    server.Router.GET(path, server.GetHandler(http.StatusOK, pager.GetTemplate(path), gin.H{}))
+    var handler func (*gin.Context)
+    if pager.IsAdmin(path) {
+      handler = server.GetAdminHandler(http.StatusOK, pager.GetTemplate(path), gin.H{})
+    } else {
+      handler = server.GetHandler(http.StatusOK, pager.GetTemplate(path), gin.H{})
+    }
+    server.Router.GET(path, handler)
   }
 }
 

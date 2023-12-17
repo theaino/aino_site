@@ -1,0 +1,13 @@
+{{ define "login" }}
+
+{{ template "header" . }}
+
+<form action="/admin" method="get">
+  <label for="password">Password: </label><br>
+  <input type="text" id="password" name="password"><br><br>
+  <input type="submit" value="Login">
+</form>
+
+{{ template "footer" . }}
+
+{{ end }}

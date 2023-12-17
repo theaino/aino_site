@@ -2,11 +2,14 @@
 
 {{ template "header" . }}
 
-<a href="/posts"><button>&lt;</button></a>
+<div class="full-post">
+  <a href="/posts"><button>&lt;</button></a>
 
-<h1>{{ .post.Title }}</h1>
-<p>{{ .post.Date }}</p>
-<p>{{ .post.Contents }}</p>
+  <h1>{{ .post.title }}</h1>
+  <p>{{ .post.date }}</p>
+  <p>{{ .post.abstract }}</p>
+  <p>{{ .post.contents }}</p>
+</div>
 
 {{ template "footer" . }}
 

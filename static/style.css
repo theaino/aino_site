@@ -21,10 +21,11 @@ ul.navbar li {
 
 ul.navbar li a {
   display: block;
-  padding: 8px;
+  padding: 10px;
   text-decoration: none;
   background-color: #dddddd;
   color: #cdcdcd;
+  font-size: 14pt;
 }
 
 ul.navbar li a:hover {
@@ -43,5 +44,36 @@ footer {
 footer p {
   float: left;
   margin: 20px;
+}
+
+div.content {
+  margin: 20px;
+  text-align: center;
+}
+
+a.post-card {
+  display: block;
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: left;
+  width: 50%;
+  border: 3px solid #ffffff;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #cdcdcd;
+}
+
+div.full-post {
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: left;
+  width: 70%;
+  color: #cdcdcd;
 }
 

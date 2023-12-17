@@ -1,7 +1,6 @@
 package database
 
 import (
-	"aino-spring.com/aino_site/config"
 	"gorm.io/gorm"
 )
 
@@ -12,10 +11,10 @@ type Page struct {
   IsAdminPage bool
 }
 
-func (page Page) GetCompletePath(conf *config.Config) string {
+func (page Page) GetCompletePath() string {
   path := page.Path
   if page.IsAdminPage {
-    path = conf.AdminPath + path
+    path = "/admin" + path
   }
   return path
 }
