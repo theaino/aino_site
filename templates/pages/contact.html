@@ -1,0 +1,30 @@
+{{ define "contact" }}
+
+{{ template "header" . }}
+
+<h1>Contact</h1>
+
+<p>
+  Feel free to contact me.
+</p>
+
+<hr class="spacer">
+
+<div class="container">
+  <div class="email">
+    <h4 class="title">E-Mail</h4>
+    <a href="mailto:info@aino-spring.com">info@aino-spring.com</a>
+  </div>
+  <div class="social">
+    <h4 class="title">Social Links</h4>
+    <div>
+      <a href="https://instagram.com/aino.spring" target="_blank"><i class="fa-brands fa-instagram fa-xl"></i></a>
+      <a href="https://threads.net/aino.spring" target="_blank"><i class="fa-brands fa-threads fa-xl"></i></a>
+      <a href="https://github.com/AinoSpring" target="_blank"><i class="fa-brands fa-github fa-xl"></i></a>
+    </div>
+  </div>
+</div>
+
+{{ template "footer" . }}
+
+{{ end }}

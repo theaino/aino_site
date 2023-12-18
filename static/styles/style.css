@@ -65,36 +65,16 @@ div.content {
   text-align: center;
 }
 
-a.post-card {
-  display: block;
-  margin-left: 25%;
-  margin-right: 25%;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  text-align: left;
-  width: 50%;
-  border: 3px solid var(--primary);
-  text-decoration: none;
-  color: var(--text);
-}
-
-div.full-post {
-  margin-left: 15%;
-  margin-right: 15%;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  text-align: center;
-  width: 70%;
-  color: var(--text);
-}
-
 button {
   border: none;
   border-radius: 2px;
   background-color: var(--primary);
   color: var(--text);
+}
+
+a {
+  color: var(--text);
+  text-decoration: none;
 }
 
 button:hover {
@@ -110,26 +90,5 @@ hr.spacer {
   border: none;
   border-top: 3px solid var(--primary);
   width: 80%;
-}
-
-div.full-post table#title {
-  table-layout: fixed;
-  width: 100%;
-}
-
-div.full-post table#title tr td {
-  width: 100%;
-}
-
-div.full-post table#title tr td.back {
-  text-align: left;
-}
-
-div.full-post table#title tr td.title {
-  text-align: center;
-}
-
-div.full-post table#title tr td.date {
-  text-align: right;
 }
 

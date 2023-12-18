@@ -122,6 +122,7 @@ func (server *Server) GetValues(template string, c *gin.Context, values gin.H) g
   title = strings.ReplaceAll(title, "_", " ")
   title = caser.String(title)
   values["title"] = title
+  values["template"] = template
   values["authed"] = server.IsAuthed(c)
   return values
 }

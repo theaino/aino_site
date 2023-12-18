@@ -1,0 +1,15 @@
+a.post-card {
+  display: block;
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: left;
+  width: 50%;
+  border: 3px solid var(--primary);
+  text-decoration: none;
+  color: var(--text);
+}
+
