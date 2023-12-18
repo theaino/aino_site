@@ -59,6 +59,7 @@ func NewServer(db *database.Connection, conf *config.Config) *Server {
   server.LoadPager(pager)
 
   server.Router.Static("/static", "static")
+  server.Router.StaticFile("/favicon.ico", "favicon.ico")
   server.Router.NoRoute(server.GetHandler(http.StatusNotFound, "not-found", gin.H{}))
 
   return server
@@ -70,18 +71,24 @@ func (server *Server) SetupManualPages() {
     if err != nil {
       log.Panic(err)
     }
-    c.HTML(http.StatusOK, "posts", server.GetValues("posts", gin.H{"posts": posts}))
+    c.HTML(http.StatusOK, "posts", server.GetValues("posts", c, gin.H{"posts": posts}))
   })
 
   server.Router.GET("/posts/:id", func (c *gin.Context) {
     id := c.Param("id")
     post, err := server.Database.FetchPost(id)
     if err != nil {
-      c.Redirect(http.StatusMovedPermanently, "/posts")
+      c.Redirect(http.StatusTemporaryRedirect, "/posts")
       return
     }
-    postMap := gin.H{"id": id, "title": post.Title, "date": post.Date, "abstract": post.Abstract, "contents": template.HTML(post.Contents), "public": post.Public}
-    c.HTML(http.StatusOK, "post", server.GetValues("post", gin.H{"post": postMap}))
+    postMap := gin.H{"id": id, "title": post.Title, "date": post.Date.Format("January 02, 2006"), "abstract": post.Abstract, "contents": template.HTML(post.Contents), "public": post.Public}
+    c.HTML(http.StatusOK, "post", server.GetValues("post", c, gin.H{"post": postMap}))
+  })
+
+  server.Router.GET("/logout", func (c *gin.Context) {
+    redirect := c.DefaultQuery("redirect", "/")
+    server.Logout(c)
+    c.Redirect(http.StatusTemporaryRedirect, redirect)
   })
 }
 
@@ -89,8 +96,6 @@ func (server *Server) IsAuthed(c *gin.Context) bool {
   queryPassword := c.Query("password")
   session := sessions.Default(c)
   sessionPassword := session.Get("password")
-  log.Println(queryPassword)
-  log.Println(sessionPassword)
   if queryPassword == "" && sessionPassword == nil {
     return false
   }
@@ -103,28 +108,37 @@ func (server *Server) IsAuthed(c *gin.Context) bool {
   return sessionPassword == server.Config.AdminPassword
 }
 
-func (server *Server) GetValues(template string, values gin.H) gin.H {
+func (server *Server) Logout(c *gin.Context) {
+  session := sessions.Default(c)
+  session.Clear()
+
+  session.Options(sessions.Options{MaxAge: -1})
+  session.Save()
+}
+
+func (server *Server) GetValues(template string, c *gin.Context, values gin.H) gin.H {
   caser := cases.Title(language.English)
   title := strings.ReplaceAll(template, "-", " ")
   title = strings.ReplaceAll(title, "_", " ")
   title = caser.String(title)
   values["title"] = title
+  values["authed"] = server.IsAuthed(c)
   return values
 }
 
 func (server *Server) GetHandler(status int, template string, values gin.H) func (*gin.Context) {
   return func (c *gin.Context) {
-    c.HTML(http.StatusOK, template, server.GetValues(template, values))
+    c.HTML(http.StatusOK, template, server.GetValues(template, c, values))
   }
 }
 
 func (server *Server) GetAdminHandler(status int, template string, values gin.H) func (*gin.Context) {
   return func (c *gin.Context) {
     if server.IsAuthed(c) {
-      c.HTML(http.StatusOK, template, server.GetValues(template, values))
+      c.HTML(http.StatusOK, template, server.GetValues(template, c, values))
       return
     }
-    c.Redirect(http.StatusMovedPermanently, "/login")
+    c.Redirect(http.StatusTemporaryRedirect, "/login")
   }
 }
 

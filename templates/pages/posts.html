@@ -2,6 +2,8 @@
 
 {{ template "header" . }}
 
+<h1>Posts</h1>
+
 {{ range $index, $post := .posts }}
 
 <a class="post-card" href="/posts/{{ $post.ID }}">

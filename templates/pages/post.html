@@ -3,12 +3,23 @@
 {{ template "header" . }}
 
 <div class="full-post">
-  <a href="/posts"><button>&lt;</button></a>
-
-  <h1>{{ .post.title }}</h1>
-  <p>{{ .post.date }}</p>
+  <table id="title">
+    <tr>
+      <td class="back">
+        <a href="/posts" class="back"><button class="square">&lt;</button></a>
+      </td>
+      <td class="title">
+        <h1>{{ .post.title }}</h1>
+      </td>
+      <td class="date">
+        <p class="date">{{ .post.date }}</p>
+      </td>
+    </tr>
+  </table>
   <p>{{ .post.abstract }}</p>
+  <hr class="spacer">
   <p>{{ .post.contents }}</p>
+  </div>
 </div>
 
 {{ template "footer" . }}

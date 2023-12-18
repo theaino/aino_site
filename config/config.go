@@ -10,6 +10,7 @@ type Config struct {
   MysqlDsn string `yaml:"mysql_dsn"`
   AdminPassword string `yaml:"admin_password"`
   SessionSecret string `yaml:"session_secret"`
+  SessionAge int `yaml:"session_age"`
 }
 
 func LoadConfig(path string) (*Config, error) {

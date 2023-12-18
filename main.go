@@ -20,5 +20,5 @@ func main() {
   db.Migrate()
   s := server.NewServer(db, conf)
   s.SetupManualPages()
-  s.Run(":8000")
+  s.Run("0.0.0.0:8000")
 }
