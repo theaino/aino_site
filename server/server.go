@@ -9,8 +9,8 @@ import (
 
 	"aino-spring.com/aino_site/config"
 	"aino-spring.com/aino_site/database"
-  "github.com/gin-contrib/sessions"
-  "github.com/gin-contrib/sessions/cookie"
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
@@ -83,6 +83,20 @@ func (server *Server) SetupManualPages() {
     }
     postMap := gin.H{"id": id, "title": post.Title, "date": post.Date.Format("January 02, 2006"), "abstract": post.Abstract, "contents": template.HTML(post.Contents), "public": post.Public}
     c.HTML(http.StatusOK, "post", server.GetValues("post", c, gin.H{"post": postMap}))
+  })
+
+  server.Router.GET("/posts/:id/edit", func (c *gin.Context) {
+    id := c.Param("id")
+    if !server.IsAuthed(c) {
+      c.Redirect(http.StatusTemporaryRedirect, "/posts/" + id)
+    }
+    post, err := server.Database.FetchPost(id)
+    if err != nil {
+      c.Redirect(http.StatusTemporaryRedirect, "/posts")
+      return
+    }
+    postMap := gin.H{"id": id, "title": post.Title, "date": post.Date.Format("January 02, 2006"), "abstract": post.Abstract, "contents": template.HTML(post.Contents), "public": post.Public}
+    c.HTML(http.StatusOK, "edit-post", server.GetValues("edit-post", c, gin.H{"post": postMap}))
   })
 
   server.Router.GET("/logout", func (c *gin.Context) {

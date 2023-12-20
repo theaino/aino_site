@@ -7,6 +7,9 @@
     <tr>
       <td class="back">
         <a href="/posts" class="back"><button class="square"><i class="fa-solid fa-angle-left"></i></button></a>
+        {{ if .authed }}
+          <a href="/posts/{{ .post.id }}/edit" class="edit"><button class="square"><i class="fa-solid fa-pen-to-square"></i></button></a>
+        {{ end }}
       </td>
       <td class="title">
         <h1>{{ .post.title }}</h1>

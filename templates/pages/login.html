@@ -2,11 +2,13 @@
 
 {{ template "header" . }}
 
-<form action="/admin" method="get">
-  <label for="password">Password: </label><br>
-  <input type="password" id="password" name="password"><br><br>
-  <input type="submit" value="Login">
-</form>
+<div class="container">
+  <form action="/admin" method="get">
+    <label for="password">Password: </label><br>
+    <input type="password" id="password" class="text-input" name="password"><br>
+    <button type="submit">Login</button>
+  </form>
+</div>
 
 {{ template "footer" . }}
 

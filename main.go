@@ -20,5 +20,6 @@ func main() {
   db.Migrate()
   s := server.NewServer(db, conf)
   s.SetupManualPages()
+  s.SetupApiPages()
   s.Run("0.0.0.0:8000")
 }

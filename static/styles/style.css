@@ -4,6 +4,7 @@
   --background: #181a1b;
   --text: #e8e6e3;
   --dark: #131516;
+  --green: #32a852;
 }
 
 body {
@@ -67,6 +68,7 @@ div.content {
 
 button {
   border: none;
+  height: 30px;
   border-radius: 2px;
   background-color: var(--primary);
   color: var(--text);
@@ -90,5 +92,20 @@ hr.spacer {
   border: none;
   border-top: 3px solid var(--primary);
   width: 80%;
+}
+
+.text-input {
+  min-height: 30px;
+  border: none;
+  background-color: var(--secondary);
+  color: var(--text);
+}
+
+#navbar-notify {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  font-size: 14pt;
+  color: var(--green);
 }
 

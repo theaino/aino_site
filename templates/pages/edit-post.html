@@ -1,0 +1,32 @@
+{{ define "edit-post" }}
+
+{{ template "header" . }}
+
+<script>
+  var _post_id = "{{ .post.id }}";
+</script>
+
+<div class="container">
+  <table id="title">
+    <tr>
+      <td class="back">
+        <a href="/posts/{{ .post.id }}" class="back"><button class="square"><i class="fa-solid fa-angle-left"></i></button></a>
+        <button id="finish-edit" class="square"><i class="fa-solid fa-circle-check"></i></button>
+      </td>
+      <td class="title">
+        <h1 id="title-edit" contenteditable="true">{{ .post.title }}</h1>
+      </td>
+      <td class="date">
+        <p class="date">{{ .post.date }}</p>
+      </td>
+    </tr>
+  </table>
+  <p id="abstract-edit" contenteditable="true">{{ .post.abstract }}</p>
+  <hr class="spacer">
+  <textarea id="contents-edit" class="text-input" contenteditable="true">{{ .post.contents }}</textarea>
+  </div>
+</div>
+
+{{ template "footer" . }}
+
+{{ end }}

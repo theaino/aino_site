@@ -44,3 +44,36 @@ func (connection *Connection) FetchPost(id string) (Post, error) {
   return post, result.Error
 }
 
+func (connection *Connection) SetPostTitle(id string, title string) error {
+  var post Post
+  result := connection.Database.First(&post, id)
+  if result.Error != nil {
+    return result.Error
+  }
+  post.Title = title
+  result = connection.Database.Save(&post)
+  return result.Error
+}
+
+func (connection *Connection) SetPostAbstract(id string, abstract string) error {
+  var post Post
+  result := connection.Database.First(&post, id)
+  if result.Error != nil {
+    return result.Error
+  }
+  post.Abstract = abstract
+  result = connection.Database.Save(&post)
+  return result.Error
+}
+
+func (connection *Connection) SetPostContents(id string, contents string) error {
+  var post Post
+  result := connection.Database.First(&post, id)
+  if result.Error != nil {
+    return result.Error
+  }
+  post.Contents = contents
+  result = connection.Database.Save(&post)
+  return result.Error
+}
+
