@@ -11,6 +11,10 @@ type Config struct {
   AdminPassword string `yaml:"admin_password"`
   SessionSecret string `yaml:"session_secret"`
   SessionAge int `yaml:"session_age"`
+  Release bool `yaml:"release"`
+  Tls bool `yaml:"tls"`
+  CertPath string `yaml:"cert_path"`
+  PrivateKeyPath string `yaml:"private_key_path"`
 }
 
 func LoadConfig(path string) (*Config, error) {

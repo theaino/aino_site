@@ -25,6 +25,10 @@ type Server struct {
 }
 
 func NewServer(db *database.Connection, conf *config.Config) *Server {
+  if conf.Release {
+    gin.SetMode(gin.ReleaseMode)
+  }
+
   server := new(Server)
   server.Database = db
   server.Config = conf
@@ -188,6 +192,10 @@ func (server *Server) LoadPager(pager *Pager) {
 }
 
 func (server *Server) Run(address string) {
-  server.Router.Run(address)
+  if server.Config.Tls {
+    server.Router.RunTLS(address, server.Config.CertPath, server.Config.PrivateKeyPath)
+  } else {
+    server.Router.Run(address)
+  }
 }
 
