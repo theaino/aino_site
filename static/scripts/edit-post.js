@@ -11,8 +11,9 @@ function setValues(title, abstract, contents, public) {
     headers: {
       "Content-type": "application/json; charset=UTF-8"
     }
-  });
-  notify("Successfully edited post");
+  }).then((response) => {
+      notify("Successfully edited post");
+    });
 }
 
 function updatePublicButton(button, public) {

@@ -86,6 +86,10 @@ func (server *Server) SetupManualPages() {
       c.Redirect(http.StatusTemporaryRedirect, "/posts")
       return
     }
+    if !(post.Public || server.IsAuthed(c)) {
+      c.Redirect(http.StatusTemporaryRedirect, "/posts")
+      return
+    }
     postMap := gin.H{"id": id, "title": post.Title, "date": post.Date.Format("January 02, 2006"), "abstract": post.Abstract, "contents": template.HTML(post.Contents), "public": post.Public}
     c.HTML(http.StatusOK, "post", server.GetValues("post", c, gin.H{"post": postMap}))
   })

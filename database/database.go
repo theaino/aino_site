@@ -96,3 +96,8 @@ func (connection *Connection) NewPost(title, abstract, contents string, public b
   return post.ID, result.Error
 }
 
+func (connection *Connection) DeletePost(id string) error {
+  result := connection.Database.Delete(&Post{}, id)
+  return result.Error
+}
+

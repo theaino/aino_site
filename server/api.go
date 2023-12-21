@@ -58,5 +58,23 @@ func (server *Server) SetupApiPages() {
     }
     c.JSON(http.StatusOK, gin.H{"id": id})
   })
+
+  server.Router.POST("/api/posts/:id/delete", func (c *gin.Context) {
+    isAuthed := server.IsAuthed(c)
+    if !isAuthed {
+      c.JSON(http.StatusForbidden, gin.H{})
+      return;
+    }
+    id := c.Param("id")
+
+    err := server.Database.DeletePost(id)
+
+    if err != nil {
+      log.Println(err)
+      c.JSON(http.StatusInternalServerError, gin.H{})
+      return
+    }
+    c.JSON(http.StatusOK, gin.H{})
+  })
 }
 
