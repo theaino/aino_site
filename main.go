@@ -21,5 +21,5 @@ func main() {
   s := server.NewServer(db, conf)
   s.SetupManualPages()
   s.SetupApiPages()
-  s.Run(":8000")
+  s.Run(conf.Address)
 }

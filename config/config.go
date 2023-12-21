@@ -15,6 +15,7 @@ type Config struct {
   Tls bool `yaml:"tls"`
   CertPath string `yaml:"cert_path"`
   PrivateKeyPath string `yaml:"private_key_path"`
+  Address string `yaml:"address"`
 }
 
 func LoadConfig(path string) (*Config, error) {
