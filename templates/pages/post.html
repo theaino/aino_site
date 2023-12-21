@@ -10,7 +10,7 @@
 <div class="container">
   <table id="title">
     <tr>
-      <td class="back">
+      <td class="back" align="left">
         <a href="/posts" class="back"><button class="square"><i class="fa-solid fa-angle-left"></i></button></a>
         {{ if .authed }}
           <a href="/posts/{{ .post.id }}/edit" class="edit"><button class="square"><i class="fa-solid fa-pen-to-square"></i></button></a>
@@ -20,7 +20,7 @@
       <td class="title">
         <h1>{{ .post.title }}</h1>
       </td>
-      <td class="date">
+      <td class="date" align="right">
         <p class="date">{{ .post.date }}</p>
       </td>
     </tr>
