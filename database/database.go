@@ -1,6 +1,8 @@
 package database
 
 import (
+	"time"
+
 	"aino-spring.com/aino_site/config"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -75,5 +77,22 @@ func (connection *Connection) SetPostContents(id string, contents string) error 
   post.Contents = contents
   result = connection.Database.Save(&post)
   return result.Error
+}
+
+func (connection *Connection) SetPostPublic(id string, public bool) error {
+  var post Post
+  result := connection.Database.First(&post, id)
+  if result.Error != nil {
+    return result.Error
+  }
+  post.Public = public
+  result = connection.Database.Save(&post)
+  return result.Error
+}
+
+func (connection *Connection) NewPost(title, abstract, contents string, public bool) (uint, error) {
+  post := Post{Title: title, Abstract: abstract, Contents: contents, Public: public, Date: time.Now()}
+  result := connection.Database.Create(&post)
+  return post.ID, result.Error
 }
 

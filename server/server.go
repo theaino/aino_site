@@ -5,7 +5,9 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"sort"
 	"strings"
+	"time"
 
 	"aino-spring.com/aino_site/config"
 	"aino-spring.com/aino_site/database"
@@ -71,6 +73,9 @@ func (server *Server) SetupManualPages() {
     if err != nil {
       log.Panic(err)
     }
+    sort.Slice(posts, func (i, j int) bool {
+      return posts[i].Date.Unix() > posts[j].Date.Unix()
+    })
     c.HTML(http.StatusOK, "posts", server.GetValues("posts", c, gin.H{"posts": posts}))
   })
 
@@ -89,6 +94,7 @@ func (server *Server) SetupManualPages() {
     id := c.Param("id")
     if !server.IsAuthed(c) {
       c.Redirect(http.StatusTemporaryRedirect, "/posts/" + id)
+      return
     }
     post, err := server.Database.FetchPost(id)
     if err != nil {
@@ -97,6 +103,14 @@ func (server *Server) SetupManualPages() {
     }
     postMap := gin.H{"id": id, "title": post.Title, "date": post.Date.Format("January 02, 2006"), "abstract": post.Abstract, "contents": template.HTML(post.Contents), "public": post.Public}
     c.HTML(http.StatusOK, "edit-post", server.GetValues("edit-post", c, gin.H{"post": postMap}))
+  })
+
+  server.Router.GET("/new-post", func (c *gin.Context) {
+    if !server.IsAuthed(c) {
+      c.Redirect(http.StatusTemporaryRedirect, "/posts")
+      return
+    }
+    c.HTML(http.StatusOK, "new-post", server.GetValues("new-post", c, gin.H{"date": time.Now().Format("January 02, 2006")}))
   })
 
   server.Router.GET("/logout", func (c *gin.Context) {

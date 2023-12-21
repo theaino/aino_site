@@ -13,3 +13,18 @@ a.post-card {
   color: var(--text);
 }
 
+div.content {
+  margin-left: 15%;
+  margin-right: 15%;
+  width: 70%;
+}
+
+#new-post {
+  width: 100%;
+  margin: 0;
+}
+
+#new-post-card {
+  background-color: var(--primary);
+}
+

@@ -1,5 +1,6 @@
 function setValues(title, abstract, contents, public) {
-  let url = location.protocol + "//" + location.host + "/api/posts/" + _post_id + "/edit";
+  let host = location.protocol + "//" + location.host;
+  let url = host + "/api/new-post";
   fetch(url, {
     method: "POST",
     body: JSON.stringify({
@@ -11,8 +12,10 @@ function setValues(title, abstract, contents, public) {
     headers: {
       "Content-type": "application/json; charset=UTF-8"
     }
-  });
-  notify("Successfully edited post");
+  }).then((response) => response.json())
+    .then((data) => {
+      window.location.replace(host + "/posts/" + data.id);
+    })
 }
 
 function updatePublicButton(button, public) {
@@ -31,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let public = document.querySelector("#public-edit");
   let finish = document.querySelector("#finish-edit");
 
-  let isPublicPost = _post_public;
+  let isPublicPost = false;
 
   updatePublicButton(public, isPublicPost);
 
