@@ -1,4 +1,4 @@
-const titles = ["Hi, I'm Aino!", "Hello, World!", "Hi, I write code."];
+const titles = ["Hi, I'm Aino.", "Hello, World!", "Hi, I write code.", "Work in progess."];
 
 function prefix(words){
   if (!words[0] || words.length == 1) return words[0] || "";
