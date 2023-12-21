@@ -1,0 +1,83 @@
+div.content {
+  display: flex;
+  margin-left: 25%;
+  margin-right: 25%;
+  width: 50%;
+  text-align: left;
+}
+
+div.title {
+  margin-left: 35%;
+  margin-right: 35%;
+  width: 30%;
+  text-align: left;
+}
+
+div.content ul {
+  list-style-type: none;
+}
+
+.card {
+  width: 50%;
+  border: solid;
+  border-color: var(--primary);
+  margin: 5px;
+}
+
+.card .title {
+  width: 100%;
+  text-align: center;
+}
+
+.card li {
+  margin: 2px;
+}
+
+.card li i {
+  margin-right: 5px;
+}
+
+#title {
+  animation-name: blink;
+  animation-timing-function: steps(1);
+  animation-iteration-count: infinite;
+  animation-duration: 2s;
+
+  border-right: solid;
+}
+
+#title.paused {
+  animation: none !important;
+}
+
+@keyframes blink {
+  0% {
+    border-right: solid;
+    margin-right: -3px;
+  }
+  50% {
+    border-right: none;
+    margin-right: 0;
+  }
+}
+
+@media (orientation: portrait) {
+  div.content {
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    padding: 0;
+  }
+  div.title {
+    text-align: center;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+  .card {
+    margin: 5px auto;
+    width: 80%;
+  }
+}
+

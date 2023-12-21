@@ -25,3 +25,9 @@ div.container > div.social > div {
   justify-content: center;
 }
 
+@media (orientation: portrait) {
+  div.container > div {
+    width: 50%;
+  }
+}
+

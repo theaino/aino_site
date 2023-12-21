@@ -28,3 +28,15 @@ div.content {
   background-color: var(--primary);
 }
 
+@media (orientation: portrait) {
+  div.content {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  a.post-card {
+    margin: 5px auto;
+    width: 80%;
+  }
+}
+

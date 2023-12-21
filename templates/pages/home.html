@@ -2,7 +2,30 @@
 
 {{ template "header" . }}
 
-<h1>Hi, I'm Aino!</h1>
+<div class="title">
+  <h1><span id="title">Hi, I'm Aino!</span></h1>
+</div>
+
+<div class="content">
+  <div class="card">
+    <h3 class="title">Personal</h3>
+    <ul>
+      <li><i class="fa-solid fa-location-dot fa-fw"></i>Saxony-Anhalt, Germany</li>
+      <li><i class="fa-solid fa-star fa-fw"></i>6 years of experience</li>
+      <li><i class="fa-brands fa-linux fa-fw"></i>Linux user</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3 class="title">Abilities</h3>
+    <ul>
+      <li><i class="fa-brands fa-golang fa-fw"></i>Golang</li>
+      <li><i class="fa-brands fa-python fa-fw"></i>Python</li>
+      <li><i class="fa-brands fa-java fa-fw"></i>Java</li>
+      <li><i class="fa-brands fa-js fa-fw"></i>JavaScript</li>
+      <li><i class="fa-brands fa-html5 fa-fw"></i>HTML/CSS</li>
+    </ul>
+  </div>
+</div>
 
 {{ template "footer" . }}
 

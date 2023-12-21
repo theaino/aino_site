@@ -28,3 +28,11 @@ div.container > table#title > tr > td.title {
 div.container > table#title > tr > td.date {
   text-align: right;
 }
+
+@media (orientation: portrait) {
+  div.container {
+    margin: 5px auto;
+    width: 100%;
+  }
+}
+
