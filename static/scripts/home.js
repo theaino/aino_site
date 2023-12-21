@@ -10,7 +10,7 @@ function prefix(words){
 }
 
 let currentTitle = "";
-let newTitle = "";
+let newTitle = titles[0];
 let remove = true;
 let titleElement = undefined;
 
