@@ -29,10 +29,20 @@ div.container > table#title > tr > td.date {
   text-align: right;
 }
 
+.mobile-title {
+  display: none;
+}
+
 @media (orientation: portrait) {
   div.container {
     margin: 5px auto;
     width: 100%;
+  }
+  .mobile-title {
+    display: block;
+  }
+  td.title {
+    display: none;
   }
 }
 

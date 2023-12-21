@@ -1,5 +1,6 @@
 function setValues(title, abstract, contents, public) {
-  let url = location.protocol + "//" + location.host + "/api/posts/" + _post_id + "/edit";
+  let host = location.protocol + "//" + location.host;
+  let url = host + "/api/posts/" + _post_id + "/edit";
   fetch(url, {
     method: "POST",
     body: JSON.stringify({
@@ -13,6 +14,7 @@ function setValues(title, abstract, contents, public) {
     }
   }).then((response) => {
       notify("Successfully edited post");
+      window.location.replace(host + "/posts/" + _post_id);
     });
 }
 
@@ -27,6 +29,9 @@ function updatePublicButton(button, public) {
 document.addEventListener("DOMContentLoaded", function () {
 
   let title = document.querySelector("#title-edit");
+  if (screen.availHeight > screen.availWidth) {
+    title = document.querySelector("#mobile-title-edit")
+  }
   let abstract = document.querySelector("#abstract-edit");
   let contents = document.querySelector("#contents-edit");
   let public = document.querySelector("#public-edit");
@@ -42,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   finish.onclick = function () {
-    setValues(title.innerText, abstract.innerText, contents.value, isPublicPost);
+    setValues(title.innerText, abstract.innerText, contents.innerText, isPublicPost);
   }
 
 });

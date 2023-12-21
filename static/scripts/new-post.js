@@ -29,6 +29,9 @@ function updatePublicButton(button, public) {
 document.addEventListener("DOMContentLoaded", function () {
 
   let title = document.querySelector("#title-edit");
+  if (screen.availHeight > screen.availWidth) {
+    title = document.querySelector("#mobile-title-edit")
+  }
   let abstract = document.querySelector("#abstract-edit");
   let contents = document.querySelector("#contents-edit");
   let public = document.querySelector("#public-edit");
@@ -44,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   finish.onclick = function () {
-    setValues(title.innerText, abstract.innerText, contents.value, isPublicPost);
+    setValues(title.innerText, abstract.innerText, contents.innerText, isPublicPost);
   }
 
 });

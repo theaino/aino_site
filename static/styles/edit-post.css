@@ -29,15 +29,28 @@ div.container > table#title > tr > td.date {
   text-align: right;
 }
 
+.mobile-title {
+  display: none;
+}
+
 #contents-edit {
-  width: 80%;
-  text-align: center;
+  margin-left: 15%;
+  margin-right: 15%;
+  width: 70%;
+  text-align: left;
+  overflow: hidden;
 }
 
 @media (orientation: portrait) {
   div.container {
     margin: 5px auto;
     width: 100%;
+  }
+  .mobile-title {
+    display: block;
+  }
+  td.title {
+    display: none;
   }
 }
 
