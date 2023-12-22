@@ -7,7 +7,7 @@
 <div class="content">
 
   {{ range $index, $post := .posts }}
-    {{ if or $post.Public $.authed }}
+    {{ if or $post.Public $.admin }}
       <a class="post-card" href="/posts/{{ $post.ID }}">
         <h2>{{ $post.Title }}</h2>
         <p>{{ $post.Abstract }}</p>
@@ -15,7 +15,7 @@
     {{ end }}
   {{ end }}
 
-  {{ if .authed }}
+  {{ if .admin }}
     <a id="new-post-card" class="post-card" href="/new-post">
       <button id="new-post" class="square"><i class="fa-solid fa-plus"></i></button><br>
     </a>

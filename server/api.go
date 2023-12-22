@@ -4,6 +4,7 @@ import (
 	"errors"
 	"log"
 	"net/http"
+	"net/mail"
 
 	"github.com/gin-gonic/gin"
 )
@@ -15,12 +16,18 @@ type PostPreset struct {
   Public bool `json:"public" binding:"required"`
 }
 
+type UserPreset struct {
+  Email string `json:"email" binding:"required"`
+  Name string `json:"name" binding:"required"`
+  Password string `json:"password" binding:"required"`
+}
+
 func (server *Server) SetupApiPages() {
   server.Router.POST("/api/posts/:id/edit", func (c *gin.Context) {
-    isAuthed := server.IsAuthed(c)
-    if !isAuthed {
+    _, isAdmin := server.CheckContext(c)
+    if !isAdmin {
       c.JSON(http.StatusForbidden, gin.H{})
-      return;
+      return
     }
     id := c.Param("id")
     var preset PostPreset
@@ -42,10 +49,10 @@ func (server *Server) SetupApiPages() {
   })
 
   server.Router.POST("/api/new-post", func (c *gin.Context) {
-    isAuthed := server.IsAuthed(c)
-    if !isAuthed {
+    _, isAdmin := server.CheckContext(c)
+    if !isAdmin {
       c.JSON(http.StatusForbidden, gin.H{})
-      return;
+      return
     }
     var preset PostPreset
     c.BindJSON(&preset)
@@ -60,10 +67,10 @@ func (server *Server) SetupApiPages() {
   })
 
   server.Router.POST("/api/posts/:id/delete", func (c *gin.Context) {
-    isAuthed := server.IsAuthed(c)
-    if !isAuthed {
+    _, isAdmin := server.CheckContext(c)
+    if !isAdmin {
       c.JSON(http.StatusForbidden, gin.H{})
-      return;
+      return
     }
     id := c.Param("id")
 
@@ -75,6 +82,21 @@ func (server *Server) SetupApiPages() {
       return
     }
     c.JSON(http.StatusOK, gin.H{})
+  })
+
+  server.Router.POST("/api/signup", func (c *gin.Context) {
+    var preset UserPreset
+    c.BindJSON(&preset)
+    _, err := mail.ParseAddress(preset.Email)
+    if err != nil {
+      c.JSON(http.StatusUnprocessableEntity, gin.H{})
+    }
+    id, err := NewUser(server.Database, preset.Email, preset.Name, preset.Password)
+    if err != nil {
+      c.JSON(http.StatusConflict, gin.H{})
+      return
+    }
+    c.JSON(http.StatusOK, gin.H{"id": id})
   })
 }
 

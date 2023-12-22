@@ -19,3 +19,9 @@ func (page Page) GetCompletePath() string {
   return path
 }
 
+func (connection *Connection) FetchPages() ([]Page, error) {
+  var pages []Page
+  result := connection.Database.Find(&pages)
+  return pages, result.Error
+}
+

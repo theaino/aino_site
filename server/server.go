@@ -5,9 +5,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	"sort"
 	"strings"
-	"time"
 
 	"aino-spring.com/aino_site/config"
 	"aino-spring.com/aino_site/database"
@@ -96,87 +94,6 @@ func NewServer(db *database.Connection, conf *config.Config) *Server {
   return server
 }
 
-func (server *Server) SetupManualPages() {
-  server.Router.GET("/posts", func (c *gin.Context) {
-    posts, err := server.Database.FetchPosts()
-    if err != nil {
-      log.Panic(err)
-    }
-    sort.Slice(posts, func (i, j int) bool {
-      return posts[i].Date.Unix() > posts[j].Date.Unix()
-    })
-    c.HTML(http.StatusOK, "posts", server.GetValues("posts", c, gin.H{"posts": posts}))
-  })
-
-  server.Router.GET("/posts/:id", func (c *gin.Context) {
-    id := c.Param("id")
-    post, err := server.Database.FetchPost(id)
-    if err != nil {
-      c.Redirect(http.StatusTemporaryRedirect, "/posts")
-      return
-    }
-    if !(post.Public || server.IsAuthed(c)) {
-      c.Redirect(http.StatusTemporaryRedirect, "/posts")
-      return
-    }
-    postMap := gin.H{"id": id, "title": post.Title, "date": post.Date.Format("January 02, 2006"), "abstract": post.Abstract, "contents": template.HTML(post.Contents), "public": post.Public}
-    c.HTML(http.StatusOK, "post", server.GetValues("post", c, gin.H{"post": postMap}))
-  })
-
-  server.Router.GET("/posts/:id/edit", func (c *gin.Context) {
-    id := c.Param("id")
-    if !server.IsAuthed(c) {
-      c.Redirect(http.StatusTemporaryRedirect, "/posts/" + id)
-      return
-    }
-    post, err := server.Database.FetchPost(id)
-    if err != nil {
-      c.Redirect(http.StatusTemporaryRedirect, "/posts")
-      return
-    }
-    postMap := gin.H{"id": id, "title": post.Title, "date": post.Date.Format("January 02, 2006"), "abstract": post.Abstract, "contents": post.Contents, "public": post.Public}
-    c.HTML(http.StatusOK, "edit-post", server.GetValues("edit-post", c, gin.H{"post": postMap}))
-  })
-
-  server.Router.GET("/new-post", func (c *gin.Context) {
-    if !server.IsAuthed(c) {
-      c.Redirect(http.StatusTemporaryRedirect, "/posts")
-      return
-    }
-    c.HTML(http.StatusOK, "new-post", server.GetValues("new-post", c, gin.H{"date": time.Now().Format("January 02, 2006")}))
-  })
-
-  server.Router.GET("/logout", func (c *gin.Context) {
-    redirect := c.DefaultQuery("redirect", "/")
-    server.Logout(c)
-    c.Redirect(http.StatusTemporaryRedirect, redirect)
-  })
-}
-
-func (server *Server) IsAuthed(c *gin.Context) bool {
-  queryPassword := c.Query("password")
-  session := sessions.Default(c)
-  sessionPassword := session.Get("password")
-  if queryPassword == "" && sessionPassword == nil {
-    return false
-  }
-  if queryPassword != "" {
-    isAuthed := queryPassword == server.Config.AdminPassword
-    session.Set("password", queryPassword)
-    session.Save()
-    return isAuthed
-  }
-  return sessionPassword == server.Config.AdminPassword
-}
-
-func (server *Server) Logout(c *gin.Context) {
-  session := sessions.Default(c)
-  session.Clear()
-
-  session.Options(sessions.Options{MaxAge: -1})
-  session.Save()
-}
-
 func (server *Server) GetValues(template string, c *gin.Context, values gin.H) gin.H {
   caser := cases.Title(language.English)
   title := strings.ReplaceAll(template, "-", " ")
@@ -184,7 +101,9 @@ func (server *Server) GetValues(template string, c *gin.Context, values gin.H) g
   title = caser.String(title)
   values["title"] = title
   values["template"] = template
-  values["authed"] = server.IsAuthed(c)
+  isAuthed, isAdmin := server.CheckContext(c)
+  values["authed"] = isAuthed
+  values["admin"] = isAdmin
   return values
 }
 
@@ -196,7 +115,8 @@ func (server *Server) GetHandler(status int, template string, values gin.H) func
 
 func (server *Server) GetAdminHandler(status int, template string, values gin.H) func (*gin.Context) {
   return func (c *gin.Context) {
-    if server.IsAuthed(c) {
+    _, isAdmin := server.CheckContext(c)
+    if isAdmin {
       c.HTML(http.StatusOK, template, server.GetValues(template, c, values))
       return
     }

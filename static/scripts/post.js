@@ -14,7 +14,7 @@ function deletePost(id) {
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  if (_authed) {
+  if (_admin) {
     let deleteButton = document.querySelector("#delete");
     deleteButton.onclick = function () {
       if (confirm("Are you sure you want to delete this post?")) {

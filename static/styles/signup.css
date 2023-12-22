@@ -4,12 +4,12 @@ div.container {
   text-align: center;
 }
 
-div.container > form > * {
+div.container > div > * {
   width: 75%;
   margin: 2px auto;
 }
 
-div.container > form > .submit {
+div.container > div > .submit {
   margin: 7.5px auto;
 }
 

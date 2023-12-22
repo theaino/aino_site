@@ -3,7 +3,7 @@
 {{ template "header" . }}
 
 <script>
-  _authed = "{{ .authed }}" === "true";
+  _admin = "{{ .admin }}" === "true";
   _post_id = "{{ .post.id }}";
 </script>
 
@@ -12,7 +12,7 @@
     <tr>
       <td class="back" align="left">
         <a href="/posts" class="back"><button class="square"><i class="fa-solid fa-angle-left"></i></button></a>
-        {{ if .authed }}
+        {{ if .admin }}
           <a href="/posts/{{ .post.id }}/edit" class="edit"><button class="square"><i class="fa-solid fa-pen-to-square"></i></button></a>
           <button id="delete" class="square"><i class="fa-solid fa-trash"></i></button>
         {{ end }}

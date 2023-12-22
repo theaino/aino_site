@@ -8,7 +8,13 @@
   {{ end }}
 
   {{ if .authed }}
-  <li class="right logout"><a href="/logout"><i class="fa-solid fa-right-from-bracket fa-fw"></i></a></li>
+  <li class="right logout">
+    <a href="/logout"><i class="fa-solid fa-right-from-bracket fa-fw"></i></a>
+  </li>
+  {{ else }}
+  <li class="right login">
+    <a href="/login"><i class="fa-solid fa-right-to-bracket fa-fw"></i></a>
+  </li>
   {{ end }}
   <li class="right" id="navbar-notify"><p></p></li>
 </ul>
