@@ -8,13 +8,14 @@
   <p>
     Don't have an account? <a class="change" href="/signup"><b>Sign up</b></a>
   </p>
-  <form action="/admin" method="get">
-    <label for="email">E-Mail</label><br>
+  <div>
+    <label for="email">Email</label><br>
     <input id="email" class="text-input" name="email"><br>
     <label for="password">Password</label><br>
     <input type="password" id="password" class="text-input" name="password"><br>
-    <button class="submit" type="submit">Sign in</button>
-  </form>
+    <p id="login-error"></p>
+    <button id="login" class="submit" type="submit">Sign in</button>
+  </div>
 </div>
 
 {{ template "footer" . }}

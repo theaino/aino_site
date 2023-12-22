@@ -13,6 +13,11 @@ div.container > div > .submit {
   margin: 7.5px auto;
 }
 
+#signup-error{
+  color: var(--red);
+  display: none;
+}
+
 @media (orientation: portrait) {
   div.container {
     width: 80%;

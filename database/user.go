@@ -23,6 +23,15 @@ func (connection *Connection) FetchUserByEmail(email string) (string, error) {
   return strconv.Itoa(int(user.ID)), nil
 }
 
+func (connection *Connection) FetchUserByName(name string) (string, error) {
+  var user User
+  result := connection.Database.First(&user, "name = ?", name)
+  if result.Error != nil {
+    return "", result.Error
+  }
+  return strconv.Itoa(int(user.ID)), nil
+}
+
 func (connection *Connection) FetchUserName(id string) (string, error) {
   var user User
   result := connection.Database.First(&user, id)

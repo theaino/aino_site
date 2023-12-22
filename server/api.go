@@ -89,14 +89,25 @@ func (server *Server) SetupApiPages() {
     c.BindJSON(&preset)
     _, err := mail.ParseAddress(preset.Email)
     if err != nil {
-      c.JSON(http.StatusUnprocessableEntity, gin.H{})
+      c.JSON(http.StatusUnprocessableEntity, gin.H{"code": 1})
+      return
+    }
+    _, err = server.Database.FetchUserByName(preset.Name)
+    if err == nil {
+      c.JSON(http.StatusConflict, gin.H{"code": 2})
+      return
     }
     id, err := NewUser(server.Database, preset.Email, preset.Name, preset.Password)
     if err != nil {
-      c.JSON(http.StatusConflict, gin.H{})
+      c.JSON(http.StatusConflict, gin.H{"code": 3})
       return
     }
     c.JSON(http.StatusOK, gin.H{"id": id})
+  })
+
+  server.Router.GET("/api/login", func (c *gin.Context) {
+    isAuthed, isAdmin := server.CheckContext(c)
+    c.JSON(http.StatusOK, gin.H{"authed": isAuthed, "admin": isAdmin})
   })
 }
 
