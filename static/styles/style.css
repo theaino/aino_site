@@ -1,12 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
 
 :root {
   --primary: #2b2f31;
   --secondary: #262a2b;
   --background: #181a1b;
   --text: #e8e6e3;
+  --dark-text: #52514f;
   --dark: #131516;
   --green: #32a852;
+  --red: #ff5733;
 }
 
 body {
@@ -36,6 +38,10 @@ ul.navbar li.right {
   float: right;
 }
 
+ul.navbar li.logout a {
+  color: var(--red);
+}
+
 ul.navbar li a {
   display: block;
   padding: 10px;
@@ -43,6 +49,10 @@ ul.navbar li a {
   background-color: var(--primary);
   font-size: 14pt;
   color: var(--text);
+}
+
+ul.navbar li.selected a {
+  text-decoration: underline;
 }
 
 ul.navbar li a:hover {
@@ -61,6 +71,10 @@ footer {
 footer p {
   float: left;
   margin: 20px;
+}
+
+footer * {
+  color: var(--dark-text);
 }
 
 div.main {
@@ -113,11 +127,12 @@ hr.spacer {
 
 @media (orientation: portrait) {
   ul.navbar {
+    display: flex;
     padding: 0;
     margin: 0;
   }
   ul.navbar li {
-    width: 25vw;
+    flex-grow: 1;
     margin: 0;
     text-align: center;
   }

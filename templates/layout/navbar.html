@@ -1,12 +1,14 @@
 {{ define "navbar" }}
 
+{{ $navvalues := navitems "home" "Home" "/home" "about" "About" "/about" "posts" "Posts" "/posts" "contact" "Contact" "/contact" }}
+
 <ul class="navbar">
-  <li><a href="/home">Home</a></li>
-  <li><a href="/about">About</a></li>
-  <li><a href="/posts">Posts</a></li>
-  <li><a href="/contact">Contact</a></li>
+  {{ range $item := $navvalues }}
+  <li {{if eq (navtemplate $item) $.template }}class="selected"{{ end }}><a href="{{ navhref $item }}">{{ navtitle $item }}</a></li>
+  {{ end }}
+
   {{ if .authed }}
-  <li class="right"><a href="/logout">Logout</a></li>
+  <li class="right logout"><a href="/logout"><i class="fa-solid fa-right-from-bracket fa-fw"></i></a></li>
   {{ end }}
   <li class="right" id="navbar-notify"><p></p></li>
 </ul>

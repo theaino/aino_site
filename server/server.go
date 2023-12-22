@@ -53,6 +53,31 @@ func NewServer(db *database.Connection, conf *config.Config) *Server {
       }
       return dict, nil
     },
+    "navitems": func(values ...string) [][]string {
+      if len(values) % 3 != 0 {
+        return nil
+      }
+      items := make([][]string, 0)
+      currentItem := make([]string, 0)
+      for idx, value := range values {
+        currentItem = append(currentItem, value)
+        if idx % 3 == 2 {
+          items = append(items, currentItem)
+          currentItem = make([]string, 0)
+          continue
+        }
+      }
+      return items
+    },
+    "navtemplate": func(value []string) string {
+      return value[0]
+    },
+    "navtitle": func(value []string) string {
+      return value[1]
+    },
+    "navhref": func(value []string) string {
+      return value[2]
+    },
   })
 
   server.Router.LoadHTMLGlob("templates/**/*")
