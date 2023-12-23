@@ -1,0 +1,11 @@
+working on
+- finish /settings css
+- finish /settings js system
+- make api handler for setting settings
+
+plans
+- admin user-manager page
+- user page (changing name, password)
+- forgot password
+- verify email
+

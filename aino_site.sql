@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 22, 2023 at 04:44 PM
+-- Generation Time: Dec 22, 2023 at 11:59 PM
 -- Server version: 11.2.2-MariaDB
 -- PHP Version: 8.2.13
 
@@ -37,19 +37,6 @@ CREATE TABLE `pages` (
   `is_admin_page` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `pages`
---
-
-INSERT INTO `pages` (`id`, `created_at`, `updated_at`, `deleted_at`, `path`, `template`, `is_admin_page`) VALUES
-(1, NULL, NULL, NULL, '/about', 'about', 0),
-(2, NULL, NULL, NULL, '/', 'home', 0),
-(3, NULL, NULL, NULL, '/home', 'home', 0),
-(4, NULL, NULL, NULL, '/', 'admin-home', 1),
-(5, NULL, NULL, NULL, '/login', 'login', 0),
-(6, NULL, NULL, NULL, '/contact', 'contact', 0),
-(8, NULL, NULL, NULL, '/signup', 'signup', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -67,6 +54,30 @@ CREATE TABLE `posts` (
   `public` tinyint(1) DEFAULT NULL,
   `abstract` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE `settings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` datetime(3) DEFAULT NULL,
+  `updated_at` datetime(3) DEFAULT NULL,
+  `deleted_at` datetime(3) DEFAULT NULL,
+  `setting_key` longtext DEFAULT NULL,
+  `type` longtext DEFAULT NULL,
+  `default_value` longtext DEFAULT NULL,
+  `value` longtext DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`id`, `created_at`, `updated_at`, `deleted_at`, `setting_key`, `type`, `default_value`, `value`) VALUES
+(1, NULL, NULL, NULL, 'allow_public_signup', 'bool', 'false', 'true');
 
 -- --------------------------------------------------------
 
@@ -104,6 +115,13 @@ ALTER TABLE `posts`
   ADD KEY `idx_posts_deleted_at` (`deleted_at`);
 
 --
+-- Indexes for table `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_settings_deleted_at` (`deleted_at`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -118,13 +136,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`

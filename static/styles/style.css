@@ -125,6 +125,10 @@ hr.spacer {
   color: var(--green);
 }
 
+.hide {
+  display: none;
+}
+
 @media (orientation: portrait) {
   ul.navbar {
     display: flex;

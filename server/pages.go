@@ -63,6 +63,37 @@ func (server *Server) SetupManualPages() {
     c.HTML(http.StatusOK, "new-post", server.GetValues("new-post", c, gin.H{"date": time.Now().Format("January 02, 2006")}))
   })
 
+  // server.Router.GET("/settings", func (c *gin.Context) {
+  //   _, isAdmin := server.CheckContext(c)
+  //   if !isAdmin {
+  //     c.Redirect(http.StatusTemporaryRedirect, "/home")
+  //     return
+  //   }
+  //   settings, err := server.Database.FetchSettings()
+  //   if err != nil {
+  //     c.Redirect(http.StatusTemporaryRedirect, "/home")
+  //     return
+  //   }
+  //   c.HTML(http.StatusOK, "settings", server.GetValues("settings", c, gin.H{"settings": settings}))
+  // })
+
+  server.Router.GET("/login", func (c *gin.Context) {
+    _, isAdmin := server.CheckContext(c)
+    allowSignup := server.Database.GetSetting("allow_public_signup").(bool) || isAdmin
+    c.HTML(http.StatusOK, "login", server.GetValues("login", c, gin.H{"allowSignup": allowSignup}))
+  })
+
+  server.Router.GET("/signup", func (c *gin.Context) {
+    if !server.Database.GetSetting("allow_public_signup").(bool) {
+      _, isAdmin := server.CheckContext(c)
+      if !isAdmin {
+        c.Redirect(http.StatusTemporaryRedirect, "/login")
+        return
+      }
+    }
+    c.HTML(http.StatusOK, "signup", server.GetValues("signup", c, gin.H{}))
+  })
+
   server.Router.GET("/logout", func (c *gin.Context) {
     redirect := c.DefaultQuery("redirect", "/")
     RemoveContextLogin(c)

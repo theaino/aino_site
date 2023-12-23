@@ -1,0 +1,22 @@
+{{ define "settings" }}
+
+{{ template "header" . }}
+
+<h1>Settings</h1>
+
+<div class="content">
+  {{ range $setting := .settings }}
+  <div class="entry">
+    <span class="key">{{ $setting.SettingKey }}</span>
+    <span class="type hide">{{ $setting.Type }}</span>
+    <span class="value hide">{{ $setting.Value }}</span>
+    <span class="default-value hide">{{ $setting.DefaultValue }}</span>
+    <span class="input"></span>
+  </div>
+  {{ end }}
+  <button id="save">Save settings</button>
+</div>
+
+{{ template "footer" . }}
+
+{{ end }}

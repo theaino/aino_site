@@ -23,6 +23,6 @@ func NewConnetion(conf *config.Config) (*Connection, error) {
 }
 
 func (connection *Connection) Migrate() {
-  connection.Database.AutoMigrate(&Page{}, &Post{}, &User{})
+  connection.Database.AutoMigrate(&Setting{}, &Page{}, &Post{}, &User{})
 }
 

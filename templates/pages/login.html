@@ -5,9 +5,11 @@
 <h1>Sign in</h1>
 
 <div class="container">
+  {{ if .allowSignup }}
   <p>
     Don't have an account? <a class="change" href="/signup"><b>Sign up</b></a>
   </p>
+  {{ end }}
   <div>
     <label for="email">Email</label><br>
     <input id="email" class="text-input" name="email"><br>
