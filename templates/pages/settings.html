@@ -5,15 +5,17 @@
 <h1>Settings</h1>
 
 <div class="content">
-  {{ range $setting := .settings }}
-  <div class="entry">
-    <span class="key">{{ $setting.SettingKey }}</span>
-    <span class="type hide">{{ $setting.Type }}</span>
-    <span class="value hide">{{ $setting.Value }}</span>
-    <span class="default-value hide">{{ $setting.DefaultValue }}</span>
-    <span class="input"></span>
-  </div>
+  <table class="entries">
+    {{ range $setting := .settings }}
+    <tr class="entry">
+      <td class="type hide">{{ $setting.Type }}</td>
+      <td class="value hide">{{ $setting.Value }}</td>
+      <td class="default-value hide">{{ $setting.DefaultValue }}</td>
+      <td class="key">{{ $setting.SettingKey }}</td>
+      <td class="input"></td>
+    </tr>
   {{ end }}
+  </table>
   <button id="save">Save settings</button>
 </div>
 

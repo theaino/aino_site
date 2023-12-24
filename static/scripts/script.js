@@ -10,3 +10,4 @@ function notify(value) {
     notifyElement.innerText = "";
   }, 3000);
 }
+

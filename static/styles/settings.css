@@ -1,0 +1,29 @@
+div.content {
+  margin: 0 auto;
+  width: 30%;
+}
+
+table.entries {
+  width: 75%;
+  margin: 10px auto;
+  margin-bottom: 15px;
+}
+
+table.entries tr td.key {
+  text-align: left;
+}
+
+table.entries tr td.input {
+  text-align: right;
+}
+
+@media (orientation: portrait) {
+  div.content {
+    width: 80%;
+  }
+
+  table.entries {
+    width: 100%;
+  }
+}
+

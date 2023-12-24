@@ -110,7 +110,7 @@ hr.spacer {
   width: 80%;
 }
 
-.text-input {
+input[type="text"], .text-input {
   min-height: 30px;
   border: none;
   background-color: var(--secondary);

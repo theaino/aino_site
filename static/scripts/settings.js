@@ -1,11 +1,18 @@
 const typeLookup = {
   "int": "number",
   "str": "text",
-  "bool": "checkbox"
+  "bool": "checkbox\" class=\"checkbox\""
 }
 
 function getTypeElement(type, id) {
-  return `<input type="${typeLookup[type]}" id="${id}">`;
+  switch (type) {
+    case "int":
+      return "<input type=\"number\" id=\"" + id + "\">";
+    case "str":
+      return "<input type=\"text\" id=\"" + id + "\">";
+    case "bool":
+      return "<button class=\"square checkbox\" id=\"" + id + "\"></button>"
+  }
 }
 
 function setTypeElementValue(type, id, value) {
@@ -95,7 +102,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   save.onclick = function () {
     let map = getSettingsMap(keys);
-    console.log(map);
     updateKeys(map);
   };
 
