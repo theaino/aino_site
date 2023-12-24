@@ -1,6 +1,8 @@
 package database
 
 import (
+	"log"
+
 	"aino-spring.com/aino_site/config"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -22,7 +24,11 @@ func NewConnetion(conf *config.Config) (*Connection, error) {
   return connection, nil
 }
 
-func (connection *Connection) Migrate() {
+func (connection *Connection) Setup() {
   connection.Database.AutoMigrate(&Setting{}, &Page{}, &Post{}, &User{})
+  err := connection.SetupSettingPresets()
+  if err != nil {
+    log.Panic(err)
+  }
 }
 

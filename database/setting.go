@@ -4,23 +4,10 @@ import (
 	"errors"
 	"log"
 	"strconv"
-
-	"gorm.io/gorm"
-)
-
-type SettingType string
-
-const (
-  Int SettingType = "int"
-  Str SettingType = "str"
-  Bool SettingType = "bool"
 )
 
 type Setting struct {
-  gorm.Model
-  SettingKey string
-  Type SettingType
-  DefaultValue string
+  SettingKey string `gorm:"primaryKey"`
   Value string
 }
 
@@ -49,7 +36,7 @@ func (connection *Connection) GetSettingSafe(key string) (interface{}, error) {
   if err != nil {
     return nil, err
   }
-  value, err := setting.Type.Parse(setting.Value)
+  value, err := SettingPresets[setting.SettingKey].Type.Parse(setting.Value)
   return value, err
 }
 
@@ -72,7 +59,7 @@ func (connection *Connection) SetSetting(key string, value string) error {
   if err != nil {
     return err
   }
-  settingType := setting.Type
+  settingType := SettingPresets[setting.SettingKey].Type
   _, err = settingType.Parse(value)
   if err != nil {
     return err

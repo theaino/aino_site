@@ -8,14 +8,17 @@
   <table class="entries">
     {{ range $setting := .settings }}
     <tr class="entry">
-      <td class="type hide">{{ $setting.Type }}</td>
-      <td class="value hide">{{ $setting.Value }}</td>
-      <td class="default-value hide">{{ $setting.DefaultValue }}</td>
-      <td class="key">{{ $setting.SettingKey }}</td>
+      <td class="type hide">{{ $setting.type }}</td>
+      <td class="value hide">{{ $setting.value }}</td>
+      <td class="default-value hide">{{ $setting.defaultValue }}</td>
+      <td class="key">{{ $setting.key }}</td>
       <td class="input"></td>
+      <td class="reset"><button class="square"><i class="fa-solid fa-trash"></i></button></td>
     </tr>
   {{ end }}
   </table>
+  <p id="settings-error"></p>
+  <p id="settings-success"></p>
   <button id="save">Save settings</button>
 </div>
 

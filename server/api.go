@@ -85,6 +85,12 @@ func (server *Server) SetupApiPages() {
   })
 
   server.Router.POST("/api/signup", func (c *gin.Context) {
+    _, isAdmin := server.CheckContext(c)
+    allowPublicSignup := server.Database.GetSetting("allow_public_signup").(bool)
+    if !(isAdmin || allowPublicSignup) {
+      c.JSON(http.StatusForbidden, gin.H{"code": 0})
+      return
+    }
     var preset UserPreset
     c.BindJSON(&preset)
     _, err := mail.ParseAddress(preset.Email)

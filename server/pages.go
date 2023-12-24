@@ -7,6 +7,7 @@ import (
 	"sort"
 	"time"
 
+	"aino-spring.com/aino_site/database"
 	"github.com/gin-gonic/gin"
 )
 
@@ -69,10 +70,20 @@ func (server *Server) SetupManualPages() {
       c.Redirect(http.StatusTemporaryRedirect, "/home")
       return
     }
-    settings, err := server.Database.FetchSettings()
+    rawSettings, err := server.Database.FetchSettings()
     if err != nil {
       c.Redirect(http.StatusTemporaryRedirect, "/home")
       return
+    }
+    settings := make([]map[string]string, 0)
+    for _, rawSetting := range rawSettings {
+      preset := database.SettingPresets[rawSetting.SettingKey]
+      settings = append(settings, map[string]string{
+        "key": rawSetting.SettingKey,
+        "value": rawSetting.Value,
+        "type": string(preset.Type),
+        "defaultValue": preset.DefaultValue,
+      })
     }
     c.HTML(http.StatusOK, "settings", server.GetValues("settings", c, gin.H{"settings": settings}))
   })

@@ -33,7 +33,7 @@ func NewServer(db *database.Connection, conf *config.Config) *Server {
 
   server.Router = gin.Default()
 
-  store := cookie.NewStore([]byte(conf.SessionSecret))
+  store := cookie.NewStore([]byte(server.Database.GetSetting("session_secret").(string)))
   server.Router.Use(sessions.Sessions("ainosession", store))
 
   server.Router.SetFuncMap(template.FuncMap{

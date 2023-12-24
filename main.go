@@ -17,7 +17,7 @@ func main() {
   if err != nil {
     log.Panic(err)
   }
-  db.Migrate()
+  db.Setup()
   s := server.NewServer(db, conf)
   s.SetupManualPages()
   s.SetupApiPages()

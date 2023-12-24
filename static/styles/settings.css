@@ -17,6 +17,16 @@ table.entries tr td.input {
   text-align: right;
 }
 
+#settings-error {
+  color: var(--red);
+  display: none;
+}
+
+#settings-success {
+  color: var(--green);
+  display: none;
+}
+
 @media (orientation: portrait) {
   div.content {
     width: 80%;

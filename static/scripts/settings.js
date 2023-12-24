@@ -26,6 +26,7 @@ function setTypeElementValue(type, id, value) {
       break;
     case "bool":
       element.checked = value == "true";
+      updateCheckboxButton(element);
       break;
   }
 }
@@ -55,15 +56,20 @@ function setEntryInputs() {
     let key = entry.querySelector(".key").innerText;
     let type = entry.querySelector(".type").innerText;
     let rawValue = entry.querySelector(".value").innerText;
+    let defaultValue = entry.querySelector(".default-value").innerText;
     let inputWrapper = entry.querySelector(".input");
+    let reset = entry.querySelector(".reset button");
     inputWrapper.innerHTML = getTypeElement(type, "input-" + key);
     setTypeElementValue(type, "input-" + key, rawValue);
+    reset.onclick = function () {
+      setTypeElementValue(type, "input-" + key, defaultValue);
+    };
     keys.push([key, type]);
   }
   return keys;
 }
 
-function updateKeys(map) {
+function updateKeys(map, settingsError, settingsSuccess) {
   let host = location.protocol + "//" + location.host;
   Object.keys(map).forEach((key) => {
     let value = map[key];
@@ -76,12 +82,12 @@ function updateKeys(map) {
         "Content-type": "application/json; charset=UTF-8"
       }
     }).then((response) => {
-        if (response.status != 400) {
+        if (response.status != 200) {
           response.json().then((data) => {
-            console.log(data.msg);
+            showError(data.msg, settingsError);
           })
         } else {
-          console.log("success");
+          showSuccess("Successfully saved settings", settingsSuccess);
         }
       });
   });
@@ -95,14 +101,28 @@ function getSettingsMap(keys) {
   return map;
 }
 
+function showError(message, settingsError) {
+  settingsError.style.display = "block";
+  settingsError.innerHTML = message;
+}
+
+function showSuccess(message, settingsSuccess) {
+  settingsSuccess.style.display = "block";
+  settingsSuccess.innerHTML = message;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
 
+  let settingsError = document.querySelector("#settings-error");
+  let settingsSuccess = document.querySelector("#settings-success");
   let save = document.querySelector("#save");
   let keys = setEntryInputs();
 
   save.onclick = function () {
+    settingsError.style.display = "none";
+    settingsSuccess.style.display = "none";
     let map = getSettingsMap(keys);
-    updateKeys(map);
+    updateKeys(map, settingsError, settingsSuccess);
   };
 
 });

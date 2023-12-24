@@ -8,8 +8,6 @@ import (
 
 type Config struct {
   MysqlDsn string `yaml:"mysql_dsn"`
-  SessionSecret string `yaml:"session_secret"`
-  SessionAge int `yaml:"session_age"`
   Release bool `yaml:"release"`
   Tls bool `yaml:"tls"`
   CertPath string `yaml:"cert_path"`

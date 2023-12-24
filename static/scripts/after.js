@@ -1,11 +1,3 @@
-function updateCheckboxButton(checkbox) {
-  if (checkbox.checked) {
-    checkbox.innerHTML = "<i class=\"fa-solid fa-check fa-xl\"></i>";
-  } else {
-    checkbox.innerHTML = "<i class=\"fa-solid fa-xmark fa-xl\"></i>";
-  }
-}
-
 document.addEventListener("DOMContentLoaded", function () {
   
   let checkboxes = document.getElementsByClassName("checkbox");

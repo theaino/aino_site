@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 24, 2023 at 01:02 PM
+-- Generation Time: Dec 24, 2023 at 09:23 PM
 -- Server version: 11.2.2-MariaDB
 -- PHP Version: 8.2.14
 
@@ -73,13 +73,7 @@ CREATE TABLE `posts` (
 --
 
 CREATE TABLE `settings` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` datetime(3) DEFAULT NULL,
-  `updated_at` datetime(3) DEFAULT NULL,
-  `deleted_at` datetime(3) DEFAULT NULL,
-  `setting_key` longtext DEFAULT NULL,
-  `type` longtext DEFAULT NULL,
-  `default_value` longtext DEFAULT NULL,
+  `setting_key` varchar(191) NOT NULL,
   `value` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -87,8 +81,9 @@ CREATE TABLE `settings` (
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`id`, `created_at`, `updated_at`, `deleted_at`, `setting_key`, `type`, `default_value`, `value`) VALUES
-(1, '0000-00-00 00:00:00.000', '2023-12-24 14:00:59.629', NULL, 'allow_public_signup', 'bool', 'true', 'true');
+INSERT INTO `settings` (`setting_key`, `value`) VALUES
+('allow_public_signup', 'true'),
+('session_secret', 'b&qmhwrc');
 
 -- --------------------------------------------------------
 
@@ -129,8 +124,7 @@ ALTER TABLE `posts`
 -- Indexes for table `settings`
 --
 ALTER TABLE `settings`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_settings_deleted_at` (`deleted_at`);
+  ADD PRIMARY KEY (`setting_key`);
 
 --
 -- Indexes for table `users`
@@ -154,12 +148,6 @@ ALTER TABLE `pages`
 --
 ALTER TABLE `posts`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `settings`
---
-ALTER TABLE `settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`

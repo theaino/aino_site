@@ -1,7 +1,5 @@
 working on
-- finish /settings css
-- /settings default value reset
-- /settings finishing touches
+
 
 plans
 - admin user-manager page
