@@ -1,4 +1,5 @@
 working on
+- /settings mobile-compatible
 
 
 plans
