@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 22, 2023 at 11:59 PM
+-- Generation Time: Dec 24, 2023 at 01:02 PM
 -- Server version: 11.2.2-MariaDB
--- PHP Version: 8.2.13
+-- PHP Version: 8.2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,6 +36,17 @@ CREATE TABLE `pages` (
   `template` longtext DEFAULT NULL,
   `is_admin_page` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `pages`
+--
+
+INSERT INTO `pages` (`id`, `created_at`, `updated_at`, `deleted_at`, `path`, `template`, `is_admin_page`) VALUES
+(1, NULL, NULL, NULL, '/about', 'about', 0),
+(2, NULL, NULL, NULL, '/', 'home', 0),
+(3, NULL, NULL, NULL, '/home', 'home', 0),
+(4, NULL, NULL, NULL, '/', 'admin-home', 1),
+(6, NULL, NULL, NULL, '/contact', 'contact', 0);
 
 -- --------------------------------------------------------
 
@@ -77,7 +88,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`id`, `created_at`, `updated_at`, `deleted_at`, `setting_key`, `type`, `default_value`, `value`) VALUES
-(1, NULL, NULL, NULL, 'allow_public_signup', 'bool', 'false', 'true');
+(1, '0000-00-00 00:00:00.000', '2023-12-24 14:00:59.629', NULL, 'allow_public_signup', 'bool', 'true', 'true');
 
 -- --------------------------------------------------------
 
@@ -136,7 +147,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `posts`

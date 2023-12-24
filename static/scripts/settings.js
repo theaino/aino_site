@@ -41,6 +41,7 @@ function getTypeElementValue(type, id) {
 }
 
 function setEntryInputs() {
+  let keys = [];
   let entries = document.getElementsByClassName("entry");
   for (let idx = 0; idx < entries.length; idx++) {
     let entry = entries.item(idx);
@@ -50,9 +51,53 @@ function setEntryInputs() {
     let inputWrapper = entry.querySelector(".input");
     inputWrapper.innerHTML = getTypeElement(type, "input-" + key);
     setTypeElementValue(type, "input-" + key, rawValue);
+    keys.push([key, type]);
   }
+  return keys;
+}
+
+function updateKeys(map) {
+  let host = location.protocol + "//" + location.host;
+  Object.keys(map).forEach((key) => {
+    let value = map[key];
+    console.log(key, value);
+    let url = host + "/api/settings/" + key + "/set/" + value;
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify({}),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    }).then((response) => {
+        if (response.status != 400) {
+          response.json().then((data) => {
+            console.log(data.msg);
+          })
+        } else {
+          console.log("success");
+        }
+      });
+  });
+}
+
+function getSettingsMap(keys) {
+  map = {};
+  keys.forEach(([key, type]) => {
+    map[key] = getTypeElementValue(type, "input-" + key);
+  });
+  return map;
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  setEntryInputs();
+
+  let save = document.querySelector("#save");
+  let keys = setEntryInputs();
+
+  save.onclick = function () {
+    let map = getSettingsMap(keys);
+    console.log(map);
+    updateKeys(map);
+  };
+
 });
+

@@ -109,5 +109,21 @@ func (server *Server) SetupApiPages() {
     isAuthed, isAdmin := server.CheckContext(c)
     c.JSON(http.StatusOK, gin.H{"authed": isAuthed, "admin": isAdmin})
   })
+
+  server.Router.POST("/api/settings/:key/set/:value", func (c *gin.Context) {
+    _, isAdmin := server.CheckContext(c)
+    if !isAdmin {
+      c.JSON(http.StatusForbidden, gin.H{})
+      return
+    }
+    key := c.Param("key")
+    value := c.Param("value")
+    err := server.Database.SetSetting(key, value)
+    if err != nil {
+      c.JSON(http.StatusInternalServerError, gin.H{"msg": err})
+      return
+    }
+    c.JSON(http.StatusOK, gin.H{})
+  })
 }
 

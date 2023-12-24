@@ -67,3 +67,18 @@ func (connection *Connection) FetchSettings() ([]Setting, error) {
   return settings, result.Error
 }
 
+func (connection *Connection) SetSetting(key string, value string) error {
+  setting, err := connection.FetchSetting(key)
+  if err != nil {
+    return err
+  }
+  settingType := setting.Type
+  _, err = settingType.Parse(value)
+  if err != nil {
+    return err
+  }
+  setting.Value = value
+  result := connection.Database.Save(&setting)
+  return result.Error
+}
+

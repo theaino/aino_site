@@ -63,19 +63,19 @@ func (server *Server) SetupManualPages() {
     c.HTML(http.StatusOK, "new-post", server.GetValues("new-post", c, gin.H{"date": time.Now().Format("January 02, 2006")}))
   })
 
-  // server.Router.GET("/settings", func (c *gin.Context) {
-  //   _, isAdmin := server.CheckContext(c)
-  //   if !isAdmin {
-  //     c.Redirect(http.StatusTemporaryRedirect, "/home")
-  //     return
-  //   }
-  //   settings, err := server.Database.FetchSettings()
-  //   if err != nil {
-  //     c.Redirect(http.StatusTemporaryRedirect, "/home")
-  //     return
-  //   }
-  //   c.HTML(http.StatusOK, "settings", server.GetValues("settings", c, gin.H{"settings": settings}))
-  // })
+  server.Router.GET("/settings", func (c *gin.Context) {
+    _, isAdmin := server.CheckContext(c)
+    if !isAdmin {
+      c.Redirect(http.StatusTemporaryRedirect, "/home")
+      return
+    }
+    settings, err := server.Database.FetchSettings()
+    if err != nil {
+      c.Redirect(http.StatusTemporaryRedirect, "/home")
+      return
+    }
+    c.HTML(http.StatusOK, "settings", server.GetValues("settings", c, gin.H{"settings": settings}))
+  })
 
   server.Router.GET("/login", func (c *gin.Context) {
     _, isAdmin := server.CheckContext(c)

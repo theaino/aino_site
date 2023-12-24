@@ -1,7 +1,7 @@
 working on
 - finish /settings css
-- finish /settings js system
-- make api handler for setting settings
+- /settings default value reset
+- /settings finishing touches
 
 plans
 - admin user-manager page
