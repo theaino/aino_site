@@ -29,11 +29,23 @@ table.entries tr td.input {
 
 @media (orientation: portrait) {
   div.content {
-    width: 80%;
+    width: 100%;
   }
 
   table.entries {
     width: 100%;
+  }
+
+  table.entries tr td:not(.hide) {
+    display: block;
+  }
+
+  table.entries tr td.input {
+    float: left;
+  }
+
+  table.entries tr td.reset {
+    text-align: left;
   }
 }
 
