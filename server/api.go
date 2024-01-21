@@ -116,6 +116,82 @@ func (server *Server) SetupApiPages() {
     c.JSON(http.StatusOK, gin.H{"authed": isAuthed, "admin": isAdmin})
   })
 
+  server.Router.POST("/api/users/:email/name/set/:value", func (c *gin.Context) {
+    _, isAdmin := server.CheckContext(c)
+    if !isAdmin {
+      c.JSON(http.StatusForbidden, gin.H{})
+      return
+    }
+    email := c.Param("email")
+    value := c.Param("value")
+
+    err := server.Database.SetUserName(email, value)
+
+    if err != nil {
+      log.Println(err)
+      c.JSON(http.StatusInternalServerError, gin.H{})
+      return
+    }
+    c.JSON(http.StatusOK, gin.H{})
+  })
+
+  server.Router.POST("/api/users/:email/email/set/:value", func (c *gin.Context) {
+    _, isAdmin := server.CheckContext(c)
+    if !isAdmin {
+      c.JSON(http.StatusForbidden, gin.H{})
+      return
+    }
+    email := c.Param("email")
+    value := c.Param("value")
+
+    err := server.Database.SetUserEmail(email, value)
+
+    if err != nil {
+      log.Println(err)
+      c.JSON(http.StatusInternalServerError, gin.H{})
+      return
+    }
+    c.JSON(http.StatusOK, gin.H{})
+  })
+
+  server.Router.POST("/api/users/:email/is-admin/set/:value", func (c *gin.Context) {
+    _, isAdmin := server.CheckContext(c)
+    if !isAdmin {
+      c.JSON(http.StatusForbidden, gin.H{})
+      return
+    }
+    email := c.Param("email")
+    value := c.Param("value")
+
+    err := server.Database.SetUserIsAdmin(email, value == "true")
+
+    if err != nil {
+      log.Println(err)
+      c.JSON(http.StatusInternalServerError, gin.H{})
+      return
+    }
+    c.JSON(http.StatusOK, gin.H{})
+  })
+
+  server.Router.POST("/api/users/:email/password/set/:value", func (c *gin.Context) {
+    _, isAdmin := server.CheckContext(c)
+    if !isAdmin {
+      c.JSON(http.StatusForbidden, gin.H{})
+      return
+    }
+    email := c.Param("email")
+    value := c.Param("value")
+
+    err := SetUserPassword(server.Database, email, value)
+
+    if err != nil {
+      log.Println(err)
+      c.JSON(http.StatusInternalServerError, gin.H{})
+      return
+    }
+    c.JSON(http.StatusOK, gin.H{})
+  })
+
   server.Router.POST("/api/settings/:key/set/:value", func (c *gin.Context) {
     _, isAdmin := server.CheckContext(c)
     if !isAdmin {

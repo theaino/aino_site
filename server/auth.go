@@ -56,6 +56,14 @@ func NewUser(db *database.Connection, email, name, password string) (string, err
   return strconv.Itoa(int(id)), nil
 }
 
+func SetUserPassword(db *database.Connection, email, password string) error {
+  passwordHash, err := GenerateHash(password)
+  if err != nil {
+    return err
+  }
+  return db.SetUserPassword(email, passwordHash)
+}
+
 func RemoveContextLogin(c *gin.Context) {
   session := sessions.Default(c)
   session.Clear()

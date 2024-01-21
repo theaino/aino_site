@@ -4,6 +4,7 @@ working on
 plans
 - admin user-manager page
 - user page (changing name, password)
+- comments on posts
 - forgot password
 - verify email
 

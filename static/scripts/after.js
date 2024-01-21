@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
     checkboxes[idx].onclick = function () {
       this.checked = !this.checked;
       updateCheckboxButton(this);
+      if (this.hasOwnProperty("oncheckclick")) {
+        this.oncheckclick();
+      }
     };
     updateCheckboxButton(checkboxes[idx]);
   }

@@ -110,4 +110,18 @@ func (server *Server) SetupManualPages() {
     RemoveContextLogin(c)
     c.Redirect(http.StatusTemporaryRedirect, redirect)
   })
+
+  server.Router.GET("/users", func (c *gin.Context) {
+    _, isAdmin := server.CheckContext(c)
+    if !isAdmin {
+      c.Redirect(http.StatusTemporaryRedirect, "/home")
+      return
+    }
+    users, err := server.Database.FetchUsers()
+    if err != nil {
+      c.Redirect(http.StatusTemporaryRedirect, "/home")
+      return
+    }
+    c.HTML(http.StatusOK, "users", server.GetValues("users", c, gin.H{"users": users}))
+  })
 }

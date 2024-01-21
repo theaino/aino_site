@@ -1,0 +1,21 @@
+{{ define "users" }}
+
+{{ template "header" . }}
+
+<h1>Users</h1>
+
+<div class="content">
+  {{ range $user := .users }}
+  <div class="user">
+    <h3>{{ $user.Name }}</h3>
+    <p class="email">{{ $user.Email }}</p>
+    <p class="hide">{{ $user.Password }}</p>
+    <span class="is-admin hide">{{ $user.IsAdmin }}</span>
+    <button class="is-admin-edit checkbox square"></button>
+  </div>
+  {{ end }}
+</div>
+
+{{ template "footer" . }}
+
+{{ end }}
