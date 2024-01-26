@@ -14,7 +14,7 @@ div.container > div > .submit {
 }
 
 #login-error {
-  color: var(--red);
+  color: var(--Red);
   display: none;
 }
 

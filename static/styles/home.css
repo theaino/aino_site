@@ -20,7 +20,7 @@ div.content ul {
 .card {
   width: 50%;
   border: solid;
-  border-color: var(--primary);
+  border-color: var(--Mantle);
   margin: 5px;
 }
 

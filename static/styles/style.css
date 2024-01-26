@@ -1,15 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
-
-:root {
-  --primary: #2b2f31;
-  --secondary: #262a2b;
-  --background: #181a1b;
-  --text: #e8e6e3;
-  --dark-text: #52514f;
-  --dark: #131516;
-  --green: #32a852;
-  --red: #ff5733;
-}
+@import url("/static/styles/colors.css");
 
 body {
   margin: 0;
@@ -18,8 +8,8 @@ body {
   display: flex;
   flex-direction: column;
   font-family: "Source Code Pro", monospace;
-  background-color: var(--background);
-  color: var(--text);
+  background-color: var(--Crust);
+  color: var(--Text);
 }
 
 ul.navbar {
@@ -27,7 +17,7 @@ ul.navbar {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: var(--secondary);
+  background-color: var(--Mantle);
 }
 
 ul.navbar li {
@@ -39,16 +29,16 @@ ul.navbar li.right {
 }
 
 ul.navbar li.logout a {
-  color: var(--red);
+  color: var(--Red);
 }
 
 ul.navbar li a {
   display: block;
   padding: 10px;
   text-decoration: none;
-  background-color: var(--primary);
+  background-color: var(--Base);
   font-size: 14pt;
-  color: var(--text);
+  color: var(--Text);
 }
 
 ul.navbar li.selected a {
@@ -56,7 +46,7 @@ ul.navbar li.selected a {
 }
 
 ul.navbar li a:hover {
-  background-color: var(--dark);
+  background-color: var(--Crust);
 }
 
 footer {
@@ -74,7 +64,7 @@ footer p {
 }
 
 footer * {
-  color: var(--dark-text);
+  color: var(--Surface0);
 }
 
 div.main {
@@ -86,17 +76,17 @@ button {
   border: none;
   height: 30px;
   border-radius: 2px;
-  background-color: var(--primary);
-  color: var(--text);
+  background-color: var(--Mantle);
+  color: var(--Text);
 }
 
 a {
-  color: var(--text);
+  color: var(--Text);
   text-decoration: none;
 }
 
 button:hover {
-  background-color: var(--secondary);
+  background-color: var(--Surface0);
 }
 
 button.square {
@@ -106,15 +96,15 @@ button.square {
 
 hr.spacer {
   border: none;
-  border-top: 3px solid var(--primary);
+  border-top: 3px solid var(--Mantle);
   width: 80%;
 }
 
 input[type="text"], input[type="number"], .text-input {
   min-height: 30px;
   border: none;
-  background-color: var(--secondary);
-  color: var(--text);
+  background-color: var(--Surface0);
+  color: var(--Text);
 }
 
 #navbar-notify {
@@ -122,7 +112,7 @@ input[type="text"], input[type="number"], .text-input {
   padding: 10px;
   text-decoration: none;
   font-size: 14pt;
-  color: var(--green);
+  color: var(--Green);
 }
 
 .hide {

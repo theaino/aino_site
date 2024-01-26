@@ -5,7 +5,7 @@ div.container {
   margin-bottom: 5px;
   text-align: center;
   width: 70%;
-  color: var(--text);
+  color: var(--Text);
 }
 
 div.container > table#title {
