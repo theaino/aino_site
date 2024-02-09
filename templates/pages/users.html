@@ -5,15 +5,25 @@
 <h1>Users</h1>
 
 <div class="content">
-  {{ range $user := .users }}
-  <div class="user">
-    <h3>{{ $user.Name }}</h3>
-    <p class="email">{{ $user.Email }}</p>
-    <p class="hide">{{ $user.Password }}</p>
-    <span class="is-admin hide">{{ $user.IsAdmin }}</span>
-    <button class="is-admin-edit checkbox square"></button>
-  </div>
-  {{ end }}
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Admin</th>
+      <th></th>
+    </tr>
+    <p id="settings-error"></p>
+    {{ range $user := .users }}
+    <tr class="user">
+      <td>{{ $user.Name }}</td>
+      <td><a class="email" href="mailto:{{ $user.Email }}">{{ $user.Email }}</a></td>
+      <td class="hide">{{ $user.Password }}</td>
+      <td class="is-admin hide">{{ $user.IsAdmin }}</td>
+      <td><button class="is-admin-edit checkbox square"></button></td>
+      <td><button class="delete square"><i class="fa-solid fa-trash"></i></button></td>
+    </tr>
+    {{ end }}
+  </table>
 </div>
 
 {{ template "footer" . }}

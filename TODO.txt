@@ -1,8 +1,7 @@
 working on
-
+- admin user-manager page
 
 plans
-- admin user-manager page
 - user page (changing name, password)
 - comments on posts
 - forgot password

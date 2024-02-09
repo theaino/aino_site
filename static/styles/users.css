@@ -1,0 +1,12 @@
+div.content > table {
+  margin: 0 auto;
+}
+
+.user td {
+  padding: 10px;
+}
+
+#settings-error {
+  color: var(--Red);
+  display: none;
+}
