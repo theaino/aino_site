@@ -12,6 +12,7 @@ type User struct {
 	Email    string
 	Password string
 	IsAdmin  bool
+	Verified bool
 }
 
 func (connection *Connection) FetchUsers() ([]User, error) {
@@ -47,6 +48,15 @@ func (connection *Connection) FetchUserName(id string) (string, error) {
 	return user.Name, nil
 }
 
+func (connection *Connection) FetchUserEmail(id string) (string, error) {
+	var user User
+	result := connection.Database.First(&user, id)
+	if result.Error != nil {
+		return "", result.Error
+	}
+	return user.Email, nil
+}
+
 func (connection *Connection) FetchUserPassword(id string) (string, error) {
 	var user User
 	result := connection.Database.First(&user, id)
@@ -65,8 +75,17 @@ func (connection *Connection) FetchUserIsAdmin(id string) (bool, error) {
 	return user.IsAdmin, nil
 }
 
+func (connection *Connection) FetchUserVerified(id string) (bool, error) {
+	var user User
+	result := connection.Database.First(&user, id)
+	if result.Error != nil {
+		return false, result.Error
+	}
+	return user.IsAdmin, nil
+}
+
 func (connection *Connection) NewUser(email, name, password string) (uint, error) {
-	user := User{Email: email, Name: name, Password: password, IsAdmin: false}
+	user := User{Email: email, Name: name, Password: password, IsAdmin: false, Verified: false}
 	var count int64
 	result := connection.Database.Model(&User{}).Count(&count)
 	if result.Error != nil {
@@ -135,6 +154,21 @@ func (connection *Connection) SetUserIsAdmin(email string, isAdmin bool) error {
 		return result.Error
 	}
 	user.IsAdmin = isAdmin
+	result = connection.Database.Save(&user)
+	return result.Error
+}
+
+func (connection *Connection) SetUserVerified(email string, verified bool) error {
+	id, err := connection.FetchUserByEmail(email)
+	if err != nil {
+		return err
+	}
+	var user User
+	result := connection.Database.First(&user, id)
+	if result.Error != nil {
+		return result.Error
+	}
+	user.Verified = verified
 	result = connection.Database.Save(&user)
 	return result.Error
 }

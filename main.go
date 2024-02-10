@@ -9,17 +9,20 @@ import (
 )
 
 func main() {
-  conf, err := config.LoadConfig("config.yaml")
-  if err != nil {
-    log.Panic(err)
-  }
-  db, err := database.NewConnetion(conf)
-  if err != nil {
-    log.Panic(err)
-  }
-  db.Setup()
-  s := server.NewServer(db, conf)
-  s.SetupManualPages()
-  s.SetupApiPages()
-  s.Run(conf.Address)
+	conf, err := config.LoadConfig("config.yaml")
+	if err != nil {
+		log.Panic(err)
+	}
+	db, err := database.NewConnetion(conf)
+	if err != nil {
+		log.Panic(err)
+	}
+	db.Setup()
+	s, err := server.NewServer(db, conf)
+	if err != nil {
+		log.Panic(err)
+	}
+	s.SetupManualPages()
+	s.SetupApiPages()
+	s.Run(conf.Address)
 }

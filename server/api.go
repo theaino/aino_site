@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"net/mail"
 
+	"aino-spring.com/aino_site/misc"
 	"github.com/gin-gonic/gin"
 )
 
@@ -103,11 +104,32 @@ func (server *Server) SetupApiPages() {
 			c.JSON(http.StatusConflict, gin.H{"code": 2})
 			return
 		}
+
 		id, err := NewUser(server.Database, preset.Email, preset.Name, preset.Password)
 		if err != nil {
+			log.Print(err)
 			c.JSON(http.StatusConflict, gin.H{"code": 3})
 			return
 		}
+
+		verify_key := misc.GenerateVerificationKey(preset.Email, server.Config.VerifySalt)
+		log.Println(verify_key)
+		verify_link := "http://" + c.Request.Host + "/api/users/" + id + "/verify/" + verify_key + "?redirect=/login"
+		verify_message, err := server.EmailTemplate.Render("verify", gin.H{"user": preset, "link": verify_link})
+		if err != nil {
+			server.Database.DeleteUser(preset.Email)
+			c.JSON(http.StatusInternalServerError, gin.H{"code": -1})
+			return
+		}
+
+		err = server.Emailer.SendMail(preset.Email, "Verify your email", verify_message)
+		if err != nil {
+			server.Database.DeleteUser(preset.Email)
+			c.JSON(http.StatusInternalServerError, gin.H{"code": -1})
+			return
+		}
+
+		server.CheckContext(c)
 		c.JSON(http.StatusOK, gin.H{"id": id})
 	})
 
@@ -206,6 +228,37 @@ func (server *Server) SetupApiPages() {
 			return
 		}
 		c.JSON(http.StatusOK, gin.H{})
+	})
+
+	server.Router.GET("/api/users/:id/verify/:key", func(c *gin.Context) {
+		id := c.Param("id")
+		key := c.Param("key")
+		redirect := c.Query("redirect")
+		do_redirect := redirect != ""
+		email, err := server.Database.FetchUserEmail(id)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"msg": err})
+			return
+		}
+		verify_key := misc.GenerateVerificationKey(email, server.Config.VerifySalt)
+
+		if key == verify_key {
+			err := server.Database.SetUserVerified(email, true)
+			if err != nil {
+				c.JSON(http.StatusInternalServerError, gin.H{"msg": err})
+				return
+			}
+			if !do_redirect {
+				c.JSON(http.StatusOK, gin.H{"msg": "Verified email"})
+				return
+			}
+		} else {
+			if !do_redirect {
+				c.JSON(http.StatusUnauthorized, gin.H{"msg": "This verification is not valid"})
+				return
+			}
+		}
+		c.Redirect(http.StatusTemporaryRedirect, redirect)
 	})
 
 	server.Router.POST("/api/settings/:key/set/:value", func(c *gin.Context) {
