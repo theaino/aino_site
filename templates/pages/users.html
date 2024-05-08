@@ -11,6 +11,7 @@
       <th>Email</th>
       <th>Admin</th>
       <th></th>
+      <th>Verified</th>
     </tr>
     <p id="settings-error"></p>
     {{ range $user := .users }}
@@ -21,6 +22,13 @@
       <td class="is-admin hide">{{ $user.IsAdmin }}</td>
       <td><button class="is-admin-edit checkbox square"></button></td>
       <td><button class="delete square"><i class="fa-solid fa-trash"></i></button></td>
+      <td>
+        {{ if $user.Verified }}
+        <i class="fa-solid fa-check fa-xl"></i>
+        {{ else }}
+        <i class="fa-solid fa-xmark fa-xl"></i>
+        {{ end }}
+      </td>
     </tr>
     {{ end }}
   </table>

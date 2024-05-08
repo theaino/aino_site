@@ -112,17 +112,7 @@ func (server *Server) SetupApiPages() {
 			return
 		}
 
-		verify_key := misc.GenerateVerificationKey(preset.Email, server.Config.VerifySalt)
-		log.Println(verify_key)
-		verify_link := "http://" + c.Request.Host + "/api/users/" + id + "/verify/" + verify_key + "?redirect=/login"
-		verify_message, err := server.EmailTemplate.Render("verify", gin.H{"user": preset, "link": verify_link})
-		if err != nil {
-			server.Database.DeleteUser(preset.Email)
-			c.JSON(http.StatusInternalServerError, gin.H{"code": -1})
-			return
-		}
-
-		err = server.Emailer.SendMail(preset.Email, "Verify your email", verify_message)
+		err = server.SendVerificationEmail(server.GetHost(c), preset.Email)
 		if err != nil {
 			server.Database.DeleteUser(preset.Email)
 			c.JSON(http.StatusInternalServerError, gin.H{"code": -1})

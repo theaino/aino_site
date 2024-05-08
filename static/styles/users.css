@@ -10,3 +10,7 @@ div.content > table {
   color: var(--Red);
   display: none;
 }
+
+table a {
+  text-decoration: underline;
+}

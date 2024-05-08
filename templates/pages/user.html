@@ -1,0 +1,18 @@
+{{ define "user" }}
+
+{{ template "header" . }}
+
+<h1>{{ .name }}</h1>
+
+<div class="content">
+  <table>
+    <tr>
+      <td>Email</td>
+      <td>{{ .email }}</td>
+    </tr>
+  </table>
+</div>
+
+{{ template "footer" . }}
+
+{{ end }}

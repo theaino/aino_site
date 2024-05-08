@@ -96,6 +96,7 @@ func NewServer(db *database.Connection, conf *config.Config) (*Server, error) {
 	server.LoadPager(pager)
 
 	server.Router.Static("/static", "static")
+	server.Router.Static("/files", "files")
 	server.Router.StaticFile("/favicon.ico", "favicon.ico")
 	server.Router.NoRoute(server.GetHandler(http.StatusNotFound, "not-found", gin.H{}))
 
