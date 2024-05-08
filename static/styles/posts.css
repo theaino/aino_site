@@ -4,13 +4,16 @@ a.post-card {
   margin-right: 25%;
   margin-top: 5px;
   margin-bottom: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
   text-align: left;
   width: 50%;
   border: 3px solid var(--Mantle);
   text-decoration: none;
   color: var(--Text);
+}
+
+a.post-card > * {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 div.content {
@@ -25,7 +28,11 @@ div.content {
 }
 
 #new-post-card {
+  margin-left: 25%;
+  margin-right: 25%;
+  width: 50%;
   background-color: var(--Mantle);
+  padding: 0;
 }
 
 @media (orientation: portrait) {

@@ -20,7 +20,7 @@ func (server *Server) SendVerificationEmail(host string, email string) error {
 	}
 
 	verifyKey := misc.GenerateVerificationKey(email, server.Config.VerifySalt)
-	verifyLink := "http://" + host + "/api/users/" + id + "/verify/" + verifyKey + "?redirect=/login"
+	verifyLink := host + "/api/users/" + id + "/verify/" + verifyKey + "?redirect=/login"
 	verifyMessage, err := server.EmailTemplate.Render("verify", gin.H{"link": verifyLink})
 	if err != nil {
 		return err

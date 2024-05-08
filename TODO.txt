@@ -1,9 +1,10 @@
 working on
 - admin user-manager page
+- verify email
+- resend
+- user page (changing name, password)
 
 plans
-- user page (changing name, password)
 - comments on posts
 - forgot password
-- verify email
 

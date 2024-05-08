@@ -1,15 +1,32 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
 @import url("/static/styles/colors.css");
 
+:root {
+  background-color: var(--Crust);
+}
+
+* {
+  font-family: "Source Code Pro", monospace;
+}
+
 body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: "Source Code Pro", monospace;
-  background-color: var(--Crust);
   color: var(--Text);
+  background-image: linear-gradient(to right, var(--Blue), var(--Green));
+  background-clip: text;
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+}
+
+.gradient {
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent; 
+  -moz-text-fill-color: transparent;
 }
 
 ul.navbar {
@@ -75,7 +92,7 @@ div.main {
 button {
   border: none;
   height: 30px;
-  border-radius: 2px;
+  border-radius: 0;
   background-color: var(--Mantle);
   color: var(--Text);
 }
@@ -103,6 +120,7 @@ hr.spacer {
 input[type="text"], input[type="number"], .text-input {
   min-height: 30px;
   border: none;
+  border-radius: 0;
   background-color: var(--Surface0);
   color: var(--Text);
 }
