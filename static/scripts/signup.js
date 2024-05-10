@@ -18,7 +18,7 @@ function requestSignup(name, email, password, signupError) {
     }
   }).then((response) => {
       if (response.status === 200) {
-        window.location.replace(host + "/login")
+        window.location.replace(host + "/home")
         return;
       }
       response.json().then((data) => {
