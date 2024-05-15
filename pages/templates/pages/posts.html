@@ -1,0 +1,18 @@
+{% extends "pages/base.html" %}
+
+{% block title %}posts{% endblock %}
+
+{% block content %}
+<h1>
+  Les posts
+</h1>
+
+<div class="container-fluid text-center">
+{% for post in posts %}
+  <a href="{% url "post" post.pk %}" class="btn btn-secondary w-75 m-2">
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.body }}</p>
+  </a>
+{% endfor %}
+</div>
+{% endblock %}
