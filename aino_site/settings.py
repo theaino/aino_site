@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "compressor",
+    "compressor_toolkit",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -130,11 +131,22 @@ STATICFILES_FINDERS = [
     "compressor.finders.CompressorFinder",
 ]
 
-COMPRESS_ENABLED = True
+COMPRESS_CSS_FILTERS = [
+    "compressor.filters.css_default.CssAbsoluteFilter",
+    "compressor.filters.cssmin.CSSMinFilter",
+    "compressor.filters.template.TemplateFilter"
+]
+
+COMPRESS_JS_FILTERS = [
+    "compressor.filters.jsmin.JSMinFilter",
+]
 
 COMPRESS_PRECOMPILERS = (
+    ("module", "compressor_toolkit.precompilers.ES6Compiler"),
     ("text/x-scss", "django_libsass.SassCompiler"),
 )
+
+COMPRESS_ENABLED = True
 
 
 # Default primary key field type
