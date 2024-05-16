@@ -1,19 +1,18 @@
 {% extends "pages/base.html" %}
+{% load static %}
 
 {% block title %}home{% endblock %}
 
+{% block css %}
+<link type="text/x-scss" href="{% static "styles/pages/home.scss" %}" rel="stylesheet" media="screen">
+{% endblock %}
+
 {% block content %}
-<h1>
-  Hello, World!asd
-</h1>
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Dropdown button
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-  </ul>
+<div class="container-fluid p-0 m-0 d-flex">
+  <div class="container-fluid text-center">
+    <h1>
+      Hi, I'm <span class="text-primary">Aino</span>
+    </h1>
+  </div>
 </div>
 {% endblock %}
