@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Pages config
+POSTS_PER_PAGE = 5
+
 
 # Application definition
 
@@ -64,7 +67,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "pages.context_processors.load_nav_obj"
+                "pages.context_processors.load_nav_obj",
+                "pages.context_processors.load_contact"
             ],
         },
     },

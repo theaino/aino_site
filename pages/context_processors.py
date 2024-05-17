@@ -6,13 +6,17 @@ def load_nav_obj(request):
             "urls": ["home"],
         },
         {
-            "name": "about",
-            "url": "about",
-            "urls": ["about"],
-        },
-        {
             "name": "posts",
             "url": "posts",
-            "urls": ["post", "posts", "posts_category"],
+            "urls": ["post", "posts"],
         }]
+    }
+
+def load_contact(request):
+    return {
+        "CONTACT": {
+            "github": "https://github.com/AinoSpring",
+            "instagram": "https://instagram.com/ainospring",
+            "email": "info@aino-spring.com",
+        }
     }

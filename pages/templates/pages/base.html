@@ -5,7 +5,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aino's {% block title %}site{% endblock %}</title>
+    <title>{% block title %}404{% endblock %} | aino</title>
     <link rel="shortcut icon" type="image/svg" href="{% static "images/logo_round.svg" %}" >
     <script src="https://kit.fontawesome.com/7aaeea235c.js" crossorigin="anonymous"></script>
     {% compress css %}
@@ -14,15 +14,29 @@
     {% endblock %}
     {% endcompress %}
   </head>
-    <body>
-      {% include "pages/navbar.html" %}
-      <div class="container-fluid text-center p-0">
-        {% block content %}
-        <h1>404 page not found</h1>
-        {% endblock %}
+  <body>
+    <div class="min-vh-100 d-flex flex-column justify-content-between">
+      <div class="container-fluid row">
+        <div class="col"></div>
+        <div class="col-sm-10 col-md-9 col-lg-8 col-xl-6 mx-auto">
+          {% include "pages/navbar.html" %}
+          <main class="container-fluid row text-center p-0">
+            <div class="col"></div>
+            <div class="col-10 mx-auto">
+              <div class="m-5"></div>
+              {% block content %}
+              <h1>404 page not found</h1>
+              {% endblock %}
+            </div>
+            <div class="col"></div>
+          </main>
+        </div>
+        <div class="col"></div>
       </div>
-    </body>
-    {% compress js %}
-    <script type="text/javascript" src="{% static "bootstrap/dist/js/bootstrap.bundle.min.js" %}"></script>
-    {% endcompress %}
+      {% include "pages/footer.html" %}
+    </div>
+  </body>
+  {% compress js %}
+  <script type="text/javascript" src="{% static "bootstrap/dist/js/bootstrap.bundle.min.js" %}"></script>
+  {% endcompress %}
 </html>
