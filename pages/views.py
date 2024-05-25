@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from pages.models import Post, Category
 from django.conf import settings
+from bs4 import BeautifulSoup
 import markdown
 
 def home(request):
@@ -43,9 +44,12 @@ def post(request, pk):
     md = markdown.Markdown(extensions=[
         "markdown.extensions.fenced_code",
         "markdown.extensions.codehilite",
+        "mdx_math",
     ])
     post = Post.objects.get(pk=pk)
     post.body = md.convert(post.body)
+    post.words = len(BeautifulSoup(post.body, "html.parser").get_text().split())
+    post.read_time = post.words // settings.WORDS_PER_MINUTE
     context = {
         "post": post,
     }

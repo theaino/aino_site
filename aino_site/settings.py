@@ -30,6 +30,8 @@ ALLOWED_HOSTS = []
 # Pages config
 POSTS_PER_PAGE = 5
 
+WORDS_PER_MINUTE = 200
+
 
 # Application definition
 
