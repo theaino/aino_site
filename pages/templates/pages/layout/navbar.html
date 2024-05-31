@@ -1,6 +1,6 @@
 {% load static %}
 <nav class="container-fluid navbar navbar-expand-lg d-flex justify-content-between">
-  <a class="navbar-brand flex-fill text-light" href="{% url "home" %}">
+  <a class="navbar-brand flex-fill text-reset" href="{% url "home" %}">
     <div class="me-auto">
       <img src="{% static "images/logo_round.svg" %}" alt="Aino" width="30" height="30" class="d-inline-block align-top">
       ino
@@ -15,7 +15,7 @@
     <ul class="navbar-nav mx-auto">
       {% for page in NAV_PAGES %}
       <li class="nav-item mx-4">
-        <a class="nav-link {% if request.resolver_match.url_name in page.urls %}text-light{% else %}text-secondary{% endif %}" href="{% url page.url %}">// {{ page.name }}</a>
+        <a class="nav-link {% if request.resolver_match.url_name in page.urls %}text-reset{% else %}text-secondary{% endif %}" href="{% url page.url %}">// {{ page.name }}</a>
       </li>
       {% endfor %}
     </ul>
