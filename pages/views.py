@@ -1,8 +1,6 @@
 from django.shortcuts import render
 from pages.models import Post, Category
 from django.conf import settings
-from bs4 import BeautifulSoup
-import markdown
 
 def home(request):
     posts = Post.objects.all().order_by("-created_on")[:settings.POSTS_PER_PAGE]

@@ -10,7 +10,7 @@
     <li class="breadcrumb-item">{{ post.read_time }} min</li>
     <li class="breadcrumb-item">{{ post.words }} word{% if post.words > 1 %}s{% endif %}</li>
   </ol>
-  <div class="container">{{ post.body|safe }}</div>
+  <div class="container">{{ post.html_body|safe }}</div>
 </div>
 
 {% endblock %}

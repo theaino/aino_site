@@ -27,9 +27,8 @@ class Post(models.Model):
             "markdown.extensions.codehilite",
             "mdx_math",
         ])
-        self.__original_body = str(self.body)
-        self.body = md.convert(self.__original_body)
-        self.words = len(BeautifulSoup(self.body, "html.parser").get_text().split())
+        self.html_body = md.convert(str(self.body))
+        self.words = len(BeautifulSoup(self.html_body, "html.parser").get_text().split())
         self.read_time = self.words // settings.WORDS_PER_MINUTE
 
     def __str__(self):
