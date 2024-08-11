@@ -1,8 +1,9 @@
 from django.db import models
 from django.conf import settings
-import markdown
+from django.urls import reverse
+from markdownx.utils import markdownify
+from markdownx.models import MarkdownxField
 from bs4 import BeautifulSoup
-
 
 
 class Router(models.Model):
@@ -16,21 +17,18 @@ class Router(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
-    body = models.TextField()
+    body = MarkdownxField()
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        md = markdown.Markdown(extensions=[
-            "markdown.extensions.fenced_code",
-            "markdown.extensions.codehilite",
-            "mdx_math",
-            "pymdownx.emoji"
-        ])
-        self.html_body = md.convert(str(self.body))
+        self.html_body = markdownify(str(self.body))
         self.words = len(BeautifulSoup(self.html_body, "html.parser").get_text().split())
         self.read_time = self.words // settings.WORDS_PER_MINUTE
+
+    def get_absolute_url(self):
+        return reverse("post", args=[str(self.pk)])
 
     def __str__(self):
         return self.title

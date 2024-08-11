@@ -1,7 +1,7 @@
 django
 django-compressor
 django-libsass
-markdown
+django-markdownx
 python-markdown-math
 beautifulsoup4
 mysqlclient

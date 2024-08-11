@@ -39,6 +39,16 @@ POSTS_PER_PAGE = 5
 
 WORDS_PER_MINUTE = 200
 
+# Markdown
+
+MARKDOWNX_MARKDOWN_EXTENSIONS = [
+    "markdown.extensions.extra",
+    "markdown.extensions.fenced_code",
+    "markdown.extensions.codehilite",
+    "mdx_math",
+    "pymdownx.emoji"
+]
+
 
 # Application definition
 
@@ -48,8 +58,10 @@ INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
+    "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "markdownx",
     "pages.apps.PagesConfig",
 ]
 
