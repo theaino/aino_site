@@ -11,6 +11,16 @@ DJANGO_DEBUG
 ```
 
 Generate secret using
-```
+```sh
 echo 'from django.core.management.utils import get_random_secret_key;print(get_random_secret_key())' | django-admin shell
+```
+
+## Setup
+
+### Syntax highlighting
+
+Generate css
+
+```sh
+python3 manage.py generate_pygments_css
 ```
