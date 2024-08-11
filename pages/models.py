@@ -3,8 +3,14 @@ from django.conf import settings
 import markdown
 from bs4 import BeautifulSoup
 
+
 class Router(models.Model):
+    name = models.CharField(max_length=255)
     specifications = models.FileField(upload_to="router_specifications")
+
+    def __str__(self):
+        return self.name
+
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
