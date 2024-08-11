@@ -4,6 +4,7 @@ import markdown
 from bs4 import BeautifulSoup
 
 
+
 class Router(models.Model):
     name = models.CharField(max_length=255)
     specifications = models.FileField(upload_to="router_specifications")
@@ -24,7 +25,8 @@ class Post(models.Model):
         md = markdown.Markdown(extensions=[
             "markdown.extensions.fenced_code",
             "markdown.extensions.codehilite",
-            "mdx_math"
+            "mdx_math",
+            "pymdownx.emoji"
         ])
         self.html_body = md.convert(str(self.body))
         self.words = len(BeautifulSoup(self.html_body, "html.parser").get_text().split())

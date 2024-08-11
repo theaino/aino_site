@@ -6,3 +6,5 @@ python-markdown-math
 beautifulsoup4
 mysqlclient
 python-dotenv
+pymdown-extensions
+pygments
