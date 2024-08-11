@@ -5,7 +5,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}404{% endblock %} | aino</title>
+    <title>{% block title %}404{% endblock %} | Aino</title>
     <link rel="shortcut icon" type="image/svg" href="{% static "images/logo_round.svg" %}" >
     <script src="https://kit.fontawesome.com/7aaeea235c.js" crossorigin="anonymous"></script>
     <script async src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS_CHTML"></script>
@@ -16,23 +16,18 @@
     {% endcompress %}
   </head>
   <body>
-    <div class="min-vh-100 d-flex flex-column justify-content-between">
-      <div class="container-fluid row">
-        <div class="col"></div>
-        <div class="col-sm-10 col-md-9 col-lg-8 col-xl-6 mx-auto">
+    <div class="min-vh-100 w-100 d-flex flex-column justify-content-between mx-auto">
+      <div class="container-fluid row justify-content-center mx-auto p-0">
+        <div class="col-sm-10 col-md-9 col-lg-8 col-xl-6">
           {% include "pages/layout/navbar.html" %}
-          <main class="container-fluid row text-center p-0">
-            <div class="col"></div>
-            <div class="col-10 mx-auto">
-              <div class="m-5"></div>
+          <main class="container-fluid row justify-content-center p-0">
+            <div class="col-sm-12 col-md-10 mt-5 text-center">
               {% block content %}
               <h1>404 page not found</h1>
               {% endblock %}
             </div>
-            <div class="col"></div>
           </main>
         </div>
-        <div class="col"></div>
       </div>
       {% include "pages/layout/footer.html" %}
     </div>

@@ -1,0 +1,7 @@
+django
+django-compressor
+django-libsass
+markdown
+python-markdown-math
+beautifulsoup4
+mysqlclient

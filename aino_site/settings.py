@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.postgres",
     "pages.apps.PagesConfig",
 ]
 
@@ -84,8 +85,12 @@ WSGI_APPLICATION = "aino_site.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "aino_site",
+        "USER": "root",
+        "PASSWORD": "2207",
+        "HOST": "localhost",
+        "PORT": "3306",
     }
 }
 

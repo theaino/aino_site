@@ -4,13 +4,21 @@
 
 {% block content %}
 <div class="container text-start">
-  <h1>{{ post.title }}</h1>
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">{{ post.created_on|date:"M d, Y" }}</li>
-    <li class="breadcrumb-item">{{ post.read_time }} min</li>
-    <li class="breadcrumb-item">{{ post.words }} word{% if post.words > 1 %}s{% endif %}</li>
-  </ol>
-  <div class="container">{{ post.html_body|safe }}</div>
+	<div class="d-flex align-items-center">
+		<h1>{{ post.title }}</h1>
+		{% if user.is_superuser %}
+		<a class="h4 text-decoration-none text-secondary ms-2" href="{% url "admin:pages_post_change" post.pk %}">
+			<i class="fa-solid fa-pen"></i>
+		</a>
+		{% endif %}
+	</div>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item">{{ post.created_on|date:"M d, Y" }}</li>
+		<li class="breadcrumb-item">{{ post.read_time }} min</li>
+		<li class="breadcrumb-item">{{ post.words }} word{% if post.words > 1 %}s{% endif %}</li>
+	</ol>
+	<hr class="mt-1 mb-1">
+	<div class="container mt-4">{{ post.html_body|safe }}</div>
 </div>
 
 {% endblock %}

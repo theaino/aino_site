@@ -1,11 +1,7 @@
 from django.contrib import admin
-from pages.models import Category, Post
-
-class CategoryAdmin(admin.ModelAdmin):
-    pass
+from pages.models import Post
 
 class PostAdmin(admin.ModelAdmin):
     pass
 
-admin.site.register(Category, CategoryAdmin)
 admin.site.register(Post, PostAdmin)
