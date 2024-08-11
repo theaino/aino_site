@@ -12,18 +12,25 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 
+from dotenv import load_dotenv 
+import os
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv(BASE_DIR / ".env")
+get_env = os.environ.get
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@81-etul3p3e8&+s1ul!yzuuo2u@ikaqre#*gqm&o!iytcfx)*'
+SECRET_KEY = get_env("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+debug = get_env("DJANGO_DEBUG")
+DEBUG = debug is None or debug.lower() == "true"
 
 ALLOWED_HOSTS = ["*"]
 
@@ -85,11 +92,11 @@ WSGI_APPLICATION = "aino_site.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "aino_site",
-        "USER": "root",
-        "PASSWORD": "2207",
-        "HOST": "localhost",
-        "PORT": "3306",
+        "NAME": get_env("DJANGO_DB_NAME"),
+        "USER": get_env("DJANGO_DB_USER"),
+        "PASSWORD": get_env("DJANGO_DB_PASSWORD"),
+        "HOST": get_env("DJANGO_DB_HOST"),
+        "PORT": get_env("DJANGO_DB_PORT")
     }
 }
 

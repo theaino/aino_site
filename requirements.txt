@@ -5,3 +5,4 @@ markdown
 python-markdown-math
 beautifulsoup4
 mysqlclient
+python-dotenv
