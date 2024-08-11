@@ -1,0 +1,64 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Posts{% endblock %}
+
+{% block content %}
+<h2><strong>Les posts</strong></h2>
+
+<div class="container-fluid text-center my-3">
+  <div class="container-fluid text-center">
+    {% for category in categories %}
+    {% if category.pk == selected_category.pk %}
+    <a href="{% url "posts" %}" class="btn btn-sm btn-secondary text-reset">{{ category.name }}</a>
+    {% else %}
+    <a href="{% url "posts" %}?category={{ category.pk|urlencode }}" class="btn btn-sm btn-outline-secondary text-reset">{{ category.name }}</a>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="container-fluid">
+    {% for post in posts %}
+    {% include "pages/layout/postcard.html" %}
+    {% endfor %}
+  </div>
+
+  <div class="container-fluid d-flex justify-content-center">
+    <ul class="pagination">
+      <li class="page-item">
+        <a{% if page_before %} href="{% url "posts" page|add:"-1" %}{% if selected_category is not None %}?category={{ selected_category.pk }}{% endif %}"{% endif %}
+                               class="page-link text-reset{% if not page_before %} disabled{% endif %}">
+          <i class="fa-solid fa-caret-left"></i>
+        </a>
+      </li>
+      {% if page_before %}
+      <li class="page-item">
+        <a href="{% url "posts" page_first %}{% if selected_category is not None %}?category={{ selected_category.pk }}{% endif %}"
+           class="page-link text-reset">
+          {{ page_first|add:"1" }}
+        </a>
+      </li>
+      {% endif %}
+      <li class="page-item">
+        <a href="{% url "posts" page %}{% if selected_category is not None %}?category={{ selected_category.pk }}{% endif %}"
+           class="page-link text-reset text-decoration-underline">
+          {{ page|add:"1" }}
+        </a>
+      </li>
+      {% if page_after %}
+      <li class="page-item">
+        <a href="{% url "posts" page_last %}{% if selected_category is not None %}?category={{ selected_category.pk }}{% endif %}"
+           class="page-link text-reset">
+          {{ page_last|add:"1" }}
+        </a>
+      </li>
+      {% endif %}
+      <li class="page-item">
+        <a{% if page_after %} href="{% url "posts" page|add:"1" %}{% if selected_category is not None %}?category={{ selected_category.pk }}{% endif %}"{% endif %}
+                              class="page-link text-reset{% if not page_after %} disabled{% endif %}">
+          <i class="fa-solid fa-caret-right"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+{% endblock %}

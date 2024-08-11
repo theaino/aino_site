@@ -1,0 +1,35 @@
+{% extends "pages/base.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block css %}
+<link type="text/x-scss" href="{% static "styles/pages/home.scss" %}" rel="stylesheet" media="screen">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid text-start">
+  <div class="container-fluid">
+    <h2><strong>WIP</strong></h2>
+    <p>
+      This website is still being worked on. Don't expect to see anything on here.
+    </p>
+    <div>
+      <a href="{{ CONTACT.github }}" class="m-1 text-reset"><i class="fa-brands fa-github fa-xl"></i></a>
+      <a href="mailto:{{ CONTACT.email}}" class="m-1 text-reset"><i class="fa-solid fa-at fa-xl"></i></a>
+      <!--<a href="{{ CONTACT.instagram }}" class="m-1 text-reset"><i class="fa-brands fa-instagram fa-xl"></i></a>-->
+    </div>
+  </div>
+  <div class="m-5"></div>
+
+  <div class="container-fluid text-center">
+    <h4 class="fw-bold">Last posts</h4>
+    {% for post in posts %}
+    {% include "pages/layout/postcard.html" %}
+    {% endfor %}
+    <div class="container-fluid d-flex justify-content-center">
+      <a href="{% url "posts" %}" class="btn btn-outline-secondary text-reset m-2"><i class="fa-solid fa-caret-down"></i> All posts</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

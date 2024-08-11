@@ -1,0 +1,30 @@
+{% load static %}
+<nav class="container-fluid navbar navbar-expand-lg d-flex justify-content-between">
+  <a class="navbar-brand flex-fill text-reset" href="{% url "home" %}">
+    <div class="me-auto">
+      <img src="{% static "images/logo_round.svg" %}" alt="Aino" width="30" height="30" class="d-inline-block align-top">
+      ino
+    </div>
+  </a>
+
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapsed-item" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse flex-fill navbar-collapsed-item">
+    <ul class="navbar-nav mx-auto">
+      {% for page in NAV_PAGES %}
+      <li class="nav-item mx-4">
+        <a class="nav-link {% if request.resolver_match.url_name in page.urls %}text-reset{% else %}text-secondary{% endif %}" href="{% url page.url %}">// {{ page.name }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="collapse navbar-collapse flex-fill navbar-collapsed-item">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a class="nav-link text-secondary" href="{{ CONTACT.github }}">GitHub <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a>
+        </li>
+    </ul>
+  </div>
+</nav>

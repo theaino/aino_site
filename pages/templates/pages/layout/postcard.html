@@ -1,0 +1,27 @@
+<!--a href="{% url "post" post.pk %}" class="btn btn-outline-secondary w-100 m-2">
+  <div class="container-fluid text-start p-2">
+    <h3 class="text-light">{{ post.title }}</h3>
+    <div class="d-flex justify-content-start">
+      <div>{{ post.created_on|date:"M d, Y" }}</div>
+      <div class="mx-1">&bull;</div>
+      <div>{{ post.read_time }} min</div>
+      <div class="mx-1">&bull;</div>
+      <div>{{ post.words }} word{% if post.words > 1 %}s{% endif %}</div>
+    </div>
+    <div>{{ post.description }}</div>
+  </div>
+</a-->
+
+<a href="{% url "post" post.pk %}" class="btn btn-outline-secondary w-100 m-2">
+  <article class="container-fluid text-start p-2">
+    <h3 class="text-light">{{ post.title }}</h3>
+    <div class="d-flex justify-content-start">
+      <div>{{ post.created_on|date:"M d, Y" }}</div>
+      <div class="mx-1">&bull;</div>
+      <div>{{ post.read_time }} min</div>
+      <div class="mx-1">&bull;</div>
+      <div>{{ post.words }} word{% if post.words > 1 %}s{% endif %}</div>
+    </div>
+    <div>{{ post.description }}</div>
+  </article>
+</a>
