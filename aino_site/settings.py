@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-@81-etul3p3e8&+s1ul!yzuuo2u@ikaqre#*gqm&o!iytcfx)*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Pages config
 POSTS_PER_PAGE = 5
