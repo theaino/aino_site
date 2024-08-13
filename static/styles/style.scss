@@ -1,6 +1,31 @@
 @import "bootstrap/scss/bootstrap";
 @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Rubik:ital,wght@0,300..900;1,300..900&family=Sankofa+Display&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+
 
 body {
   font-family: "Kanit", monospace;
+}
+
+.source-code-highlight {
+  border-radius: 5px;
+}
+
+.source-code-highlight pre {
+  padding: 5px;
+}
+
+.source-code-highlight * {
+  font-family: "Fira Code", monospace;
+}
+
+.source-code-highlight pre {
+  position: relative;
+}
+
+.source-code-highlight .copy-code-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 12pt;
 }
