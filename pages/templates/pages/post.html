@@ -18,7 +18,11 @@
 		<li class="breadcrumb-item">{{ post.words }} word{% if post.words > 1 %}s{% endif %}</li>
 	</ol>
 	<hr class="mt-1 mb-1">
-	<div class="container mt-4">{{ post.html_body|safe }}</div>
+	<div class="container mt-4 markdownx">
+		<div class="markdownx-preview">
+			{{ post.html_body|safe }}
+		</div>
+	</div>
 </div>
 
 {% endblock %}

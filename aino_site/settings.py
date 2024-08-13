@@ -41,13 +41,19 @@ WORDS_PER_MINUTE = 200
 
 # Markdown
 
+MARKDOWNX_UPLOAD_CONTENT_TYPES = []
 MARKDOWNX_MARKDOWN_EXTENSIONS = [
-    "markdown.extensions.extra",
-    "markdown.extensions.fenced_code",
-    "markdown.extensions.codehilite",
-    "mdx_math",
-    "pymdownx.emoji"
+    "extra",
+    "fenced_code",
+    "codehilite",
+    #"mdx_math",
+    #"pymdownx.emoji"
 ]
+MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
+    "codehilite": {
+        "linenums": True
+    }
+}
 
 
 # Application definition
@@ -58,7 +64,6 @@ INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
-    "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "markdownx",

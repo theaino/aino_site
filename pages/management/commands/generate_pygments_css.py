@@ -12,8 +12,8 @@ class Command(BaseCommand):
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
 
-        formatter = HtmlFormatter(style="monokai", cssclass="codehilite")
-        css_content = formatter.get_style_defs()
+        formatter = HtmlFormatter(cssfile="pygments.css", style="one-dark")
+        css_content = formatter.get_style_defs(".codehilite")
 
         with open(output_file, "w") as f:
             f.write(css_content)
