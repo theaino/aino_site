@@ -9,7 +9,7 @@ $(() => {
 			$(element).children("code").after(button);
 
 			button.text(copy_button_label);
-			button.addClass("copy-code-button btn");
+			button.addClass("copy-code-button");
 
 			button.on("click", async () => {
 				await copy_code(element);

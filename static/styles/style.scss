@@ -28,4 +28,12 @@ body {
   top: 0;
   right: 0;
   font-size: 12pt;
+  background: none!important;
+  border: none;
+  margin: 3px!important;
+  cursor: pointer;
+}
+
+.source-code-highlight .copy-code-button:active {
+  color: var(--bs-secondary);
 }
