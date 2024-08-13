@@ -46,8 +46,8 @@ MARKDOWNX_MARKDOWN_EXTENSIONS = [
     "extra",
     "fenced_code",
     "codehilite",
-    #"mdx_math",
-    #"pymdownx.emoji"
+    "mdx_math",
+    "pymdownx.emoji"
 ]
 MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
     "codehilite": {
