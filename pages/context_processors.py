@@ -15,9 +15,9 @@ def load_nav_obj(request):
 def load_contact(request):
     return {
         "CONTACT": {
-            "github": "https://github.com/AinoSpring",
-            "github_site": "https://github.com/AinoSpring/aino_site",
-            "instagram": "https://instagram.com/ainospring",
+            "github": "https://github.com/theaino",
+            "github_site": "https://github.com/theaino/aino_site",
+            "instagram": "https://instagram.com/aino.spring",
             "email": "info@aino-spring.com",
         }
     }
