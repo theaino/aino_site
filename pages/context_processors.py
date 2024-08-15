@@ -1,16 +1,23 @@
 def load_nav_obj(request):
-    return {
-            "NAV_PAGES": [{
+    pages = [
+            {
                 "name": "home",
                 "url": "home",
                 "urls": ["home"],
                 },
-                          {
-                              "name": "posts",
-                              "url": "posts",
-                              "urls": ["post", "posts"],
-                              }]
-                          }
+            {
+                "name": "posts",
+                "url": "posts",
+                "urls": ["post", "posts"],
+                }
+            ]
+    if request.user.is_authenticated:
+        pages.append({
+            "name": "nextcloud",
+            "url": "https://nextcloud.aino-spring.com",
+            "urls": []
+            })
+    return {"NAV_PAGES": pages}
 
 def load_contact(request):
     return {

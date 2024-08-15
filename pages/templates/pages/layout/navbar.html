@@ -6,15 +6,12 @@
     </div>
   </a>
 
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapsed-item" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
   <div class="collapse navbar-collapse flex-fill navbar-collapsed-item">
     <ul class="navbar-nav mx-auto">
       {% for page in NAV_PAGES %}
       <li class="nav-item mx-4">
-        <a class="nav-link {% if request.resolver_match.url_name in page.urls %}text-reset{% else %}text-secondary{% endif %}" href="{% url page.url %}">// {{ page.name }}</a>
+				<a class="nav-link {% if request.resolver_match.url_name in page.urls %}text-reset{% else %}text-secondary{% endif %}"
+					 href="{% if "://" in page.url %}{{ page.url }}{% else %}{% url page.url %}{% endif %}">// {{ page.name }}</a>
       </li>
       {% endfor %}
     </ul>
@@ -26,4 +23,8 @@
         </li>
     </ul>
   </div>
+
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapsed-item" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 </nav>
