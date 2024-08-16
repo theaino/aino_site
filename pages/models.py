@@ -19,13 +19,15 @@ class Post(models.Model):
     description = models.CharField(max_length=255)
     body = MarkdownxField()
     public = models.BooleanField()
+    like_ips = models.JSONField(editable=False)
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.html_body = markdownify(str(self.body))
-        self.words = len(BeautifulSoup(self.html_body, "html.parser").get_text().split())
+        self.words = len(BeautifulSoup(self.html_body, "html.parser")
+                         .get_text().split())
         self.read_time = self.words // settings.WORDS_PER_MINUTE
 
     def get_absolute_url(self):

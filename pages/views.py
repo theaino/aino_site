@@ -1,6 +1,16 @@
 from django.shortcuts import render
 from pages.models import Post
 from django.conf import settings
+from django.http import HttpResponse
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(",")[0]
+    else:
+        ip = request.META.get("REMOTE_ADDR")
+    return ip
 
 
 def home(request):
@@ -43,7 +53,18 @@ def posts(request, page=0):
 
 def post(request, pk):
     post = Post.objects.get(pk=pk)
+    ip = get_client_ip(request)
     context = {
         "post": post,
+        "liked": ip in post.like_ips.keys() and post.like_ips[ip],
+        "like_count": sum([1 if x else 0 for x in post.like_ips.values()])
     }
     return render(request, "pages/post.html", context)
+
+
+def like_post(request, pk, like):
+    post = Post.objects.get(pk=pk)
+    ip = get_client_ip(request)
+    post.like_ips[ip] = like != 0
+    post.save()
+    return HttpResponse(sum([1 if x else 0 for x in post.like_ips.values()]))

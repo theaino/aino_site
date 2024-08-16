@@ -4,13 +4,25 @@
 
 {% block content %}
 <div class="container text-start">
-	<div class="d-flex align-items-center">
-		<h1>{{ post.title }}</h1>
-		{% if user.is_superuser %}
-		<a class="h4 text-decoration-none text-secondary ms-2" href="{% url "admin:pages_post_change" post.pk %}">
-			<i class="fa-solid fa-pen"></i>
-		</a>
-		{% endif %}
+	<div class="d-flex justify-content-between align-items-center">
+		<div class="d-flex align-items-center">
+			<h1>{{ post.title }}</h1>
+			{% if user.is_superuser %}
+			<a class="h4 text-decoration-none text-secondary ms-2" href="{% url "admin:pages_post_change" post.pk %}">
+				<i class="fa-solid fa-pen"></i>
+			</a>
+			{% endif %}
+		</div>
+		<div class="d-flex align-items-center">
+			<h3 id="like-count">{{ like_count }}</h3>
+			<button class="btn h4 {% if liked %}text-primary{% endif %}"
+							id="like-button"
+							data-like-url="{% url "like_post" post.pk 1 %}"
+							data-unlike-url="{% url "like_post" post.pk 0 %}"
+							data-liked="{{ liked }}"
+							data-likes="{{ like_count }}"
+							><i class="fa-solid fa-heart fa-xl"></i></button>
+		</div>
 	</div>
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item">{{ post.created_on|date:"M d, Y" }}</li>
@@ -24,5 +36,26 @@
 		</div>
 	</div>
 </div>
+{% endblock %}
 
+{% block js %}
+<script>
+	$(() => {
+		const like_button = $("#like-button");
+		const like_count = $("#like-count");
+		let liked = like_button.data("liked") == "True";
+		let likes = like_button.data("likes");
+		if (liked) {likes--;}
+		like_button.click(async () => {
+			liked = !liked;
+			await fetch(like_button.data(liked ? "like-url" : "unlike-url"));
+			like_count.text((likes + (liked ? 1 : 0)).toString());
+			if (liked) {
+				like_button.addClass("text-primary");
+			} else {
+				like_button.removeClass("text-primary");
+			}
+		});
+	});
+</script>
 {% endblock %}
