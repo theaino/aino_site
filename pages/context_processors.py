@@ -19,6 +19,7 @@ def load_nav_obj(request):
             })
     return {"NAV_PAGES": pages}
 
+
 def load_contact(request):
     return {
             "CONTACT": {
@@ -28,6 +29,7 @@ def load_contact(request):
                 "email": "info@aino-spring.com",
                 }
             }
+
 
 def load_sites(request):
     return {
