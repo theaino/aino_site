@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 
-from dotenv import load_dotenv 
+from dotenv import load_dotenv
 import os
 
 import pygments.formatters
@@ -58,7 +58,8 @@ MARKDOWNX_MARKDOWN_EXTENSIONS = [
         "fenced_code",
         "codehilite",
         "mdx_math",
-        "pymdownx.emoji"
+        "pymdownx.emoji",
+        "md_ext.image"
         ]
 MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
         "codehilite": {
