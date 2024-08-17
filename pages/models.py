@@ -19,7 +19,7 @@ class Post(models.Model):
     description = models.CharField(max_length=255)
     body = MarkdownxField()
     public = models.BooleanField()
-    like_ips = models.JSONField(editable=False)
+    like_ips = models.JSONField(editable=False, default=dict)
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 
