@@ -53,7 +53,8 @@ def posts(request, page=0):
 
 def post(request, pk):
     post = Post.objects.get(pk=pk)
-    ip = get_client_ip(request)
+    session_ip = request.session.get("like_ip")
+    ip = session_ip if session_ip else get_client_ip(request)
     context = {
         "post": post,
         "liked": ip in post.like_ips.keys() and post.like_ips[ip],
@@ -64,7 +65,12 @@ def post(request, pk):
 
 def like_post(request, pk, like):
     post = Post.objects.get(pk=pk)
-    ip = get_client_ip(request)
+    session_ip = request.session.get("like_ip")
+    ip = session_ip if session_ip else get_client_ip(request)
+
     post.like_ips[ip] = like != 0
     post.save()
-    return HttpResponse(sum([1 if x else 0 for x in post.like_ips.values()]))
+
+    request.session["like_ip"] = ip
+
+    return HttpResponse()
