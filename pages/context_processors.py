@@ -30,6 +30,12 @@ def load_contact(request):
                 }
             }
 
+def load_links(request):
+    return {
+            "LINKS": {
+                "bc_donation": "https://akawzwdl.donorsupport.co/page/donate-now"
+                }
+            }
 
 def load_sites(request):
     return {
