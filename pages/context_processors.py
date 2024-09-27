@@ -27,6 +27,7 @@ def load_contact(request):
                 "github_site": "https://github.com/theaino/aino_site",
                 "instagram": "https://instagram.com/aino.spring",
                 "email": "info@aino-spring.com",
+                "email_shown": "info(at)aino-spring.com",
                 }
             }
 

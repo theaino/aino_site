@@ -2,6 +2,8 @@
   <div class="col d-flex justify-content-center align-items-center">
 		<div>&copy; {% now "Y" %} Aino Spring</div>
 		<div class="mx-2">&bull;</div>
+		<a href="mailto:{{ CONTACT.email}}" class="text-reset text-decoration-none">{{ CONTACT.email_shown }}</a>
+		<div class="mx-2">&bull;</div>
 		<div><a href="{{ CONTACT.github_site }}" class="text-reset text-decoration-none">This site on GitHub</a></div>
   </div>
 </footer>
