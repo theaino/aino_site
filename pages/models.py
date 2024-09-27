@@ -1,17 +1,39 @@
 from django.db import models
+from django.db.models.signals import post_delete, pre_save
+from django.dispatch import receiver
 from django.conf import settings
 from django.urls import reverse
 from markdownx.utils import markdownify
 from markdownx.models import MarkdownxField
 from bs4 import BeautifulSoup
+import os
 
 
 class Router(models.Model):
-    name = models.CharField(max_length=255)
-    specifications = models.FileField(upload_to="router_specifications")
+    file = models.FileField(upload_to="router_specifications")
 
     def __str__(self):
-        return self.name
+        return self.file.path.split("/")[-1]
+
+
+@receiver(post_delete, sender=Router)
+def delete_specification_file(sender, instance, **kwargs):
+    if instance.file:
+        if os.path.isfile(instance.file.path):
+            os.remove(instance.file.path)
+
+@receiver(pre_save, sender=Router)
+def delete_old_file_on_update(sender, instance, **kwargs):
+    if not instance.pk:
+        return False
+    try:
+        old_file = Router.objects.get(pk=instance.pk).file
+    except Router.DoesNotExist:
+        return False
+    new_file = instance.file
+    if old_file != new_file:
+        if old_file and os.path.isfile(old_file.path):
+            os.remove(old_file.path)
 
 
 class Post(models.Model):
