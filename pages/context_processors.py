@@ -1,3 +1,5 @@
+from django.conf import settings
+
 def load_nav_obj(request):
     pages = [
             {
@@ -44,3 +46,9 @@ def load_sites(request):
                 "searxng": "https://search.aino-spring.com"
                 }
             }
+
+def load_settings(request):
+    return {
+            "SETTINGS": settings
+            }
+

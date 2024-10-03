@@ -41,6 +41,8 @@ POSTS_PER_PAGE = 5
 
 WORDS_PER_MINUTE = 200
 
+SHOW_LIKES = False
+
 # Markdown
 
 PYGMENTS_CSS_CLASS = "source-code-highlight"
@@ -108,7 +110,8 @@ TEMPLATES = [
                     "pages.context_processors.load_nav_obj",
                     "pages.context_processors.load_contact",
                     "pages.context_processors.load_links",
-                    "pages.context_processors.load_sites"
+                    "pages.context_processors.load_sites",
+                    "pages.context_processors.load_settings"
                     ],
                 },
             },

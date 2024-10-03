@@ -13,6 +13,7 @@
 			</a>
 			{% endif %}
 		</div>
+		{% if SETTINGS.SHOW_LIKES %}
 		<div class="d-flex align-items-center">
 			<h3 id="like-count">{{ like_count }}</h3>
 			<button class="btn h4 {% if liked %}text-primary{% endif %}"
@@ -23,6 +24,7 @@
 							data-likes="{{ like_count }}"
 							><i class="fa-solid fa-heart fa-xl"></i></button>
 		</div>
+		{% endif %}
 	</div>
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item">{{ post.created_on|date:"M d, Y" }}</li>
