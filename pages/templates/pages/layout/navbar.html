@@ -1,41 +1,25 @@
 {% load static %}
-<nav class="container-fluid navbar navbar-expand-lg d-flex justify-content-between">
-	<div class="navbar-brand flex-fill d-flex align-items-center">
-		<a class="text-reset text-decoration-none" href="{% url "home" %}">
-			<div class="me-auto">
-				Aino
-			</div>
+<nav class="w-100 row mt-3 mx-0">
+	<div class="col-3 d-flex justify-content-start">
+		<a class="text-reset text-decoration-none h4" href="{% url "home" %}">
+			Aino
 		</a>
 	</div>
 
-  <div class="collapse navbar-collapse flex-fill navbar-collapsed-item">
-    <ul class="navbar-nav mx-auto">
-      {% for page in NAV_PAGES %}
-      <li class="nav-item mx-4">
-				<a class="nav-link {% if request.resolver_match.url_name in page.urls %}text-reset{% else %}text-secondary{% endif %}"
-					 href="{% if "://" in page.url %}{{ page.url }}{% else %}{% url page.url %}{% endif %}">// {{ page.name }}</a>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
-	<div class="collapse navbar-collapse flex-fill navbar-collapsed-item">
-		<ul class="navbar-nav ms-auto">
-			<li class="nav-item">
-				{% if user.is_superuser %}
-				<form method="post" action="{% url 'admin:logout' %}?next=%2F">
-					{% csrf_token %}
-					<button class="nav-link text-danger" type="submit">Logout</button>
-				</form>
-				{% endif %}
-			</li>
-			<li class="nav-item">
-				<div id="theme-toggle" class="nav-link" style="cursor: pointer"><i class="fa-solid fa-circle-half-stroke"></i></div>
-			</li>
-			<!--a class="nav-link text-secondary" href="{{ CONTACT.github }}">GitHub <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a-->
-    </ul>
-  </div>
+	<div class="col-6 d-flex justify-content-center">
+		{% for page in NAV_PAGES %}
+			<a class="mx-4 text-decoration-none {% if request.resolver_match.url_name in page.urls %}text-reset{% else %}text-secondary{% endif %}"
+				 href="{% if "://" in page.url %}{{ page.url }}{% else %}{% url page.url %}{% endif %}">// {{ page.name }}</a>
+		{% endfor %}
+	</div>
 
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapsed-item" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+	<div class="col-3 d-flex justify-content-end">
+		{% if user.is_superuser %}
+		<form method="post" action="{% url 'admin:logout' %}?next=%2F">
+			{% csrf_token %}
+			<button class="text-danger" type="submit">Logout</button>
+		</form>
+		{% endif %}
+		<div id="theme-toggle" class="nav-link" style="cursor: pointer"><i class="fa-solid fa-circle-half-stroke"></i></div>
+	</div>
 </nav>
