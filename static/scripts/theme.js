@@ -1,5 +1,6 @@
 function set_theme(value) {
 	$("html").attr("data-bs-theme", value);
+	Cookies.set("theme", value);
 }
 
 $(() => {
@@ -10,7 +11,6 @@ $(() => {
 	toggle.on("click", () => {
 		console.log(theme);
 		theme = theme == "dark" ? "light" : "dark";
-		Cookies.set("theme", theme);
 		set_theme(theme);
 	});
 });
