@@ -13,17 +13,17 @@
 	</div>
 
   <div class="container-fluid">
-    {% for post in posts %}
-    {% include "pages/layout/postcard.html" %}
-    {% endfor %}
-		{% if not posts %}
-		<div class="m-4 h3">
-			No posts have been found.
-		</div>
-		{% endif %}
-  </div>
+			{% for post in posts %}
+			{% include "pages/layout/postcard.html" %}
+			{% endfor %}
+			{% if not posts %}
+			<div class="m-4 h3">
+				No posts have been found.
+			</div>
+			{% endif %}
+	</div>
 
-  <div class="container-fluid d-flex justify-content-center">
+	<div class="container-fluid d-flex justify-content-center">
     <ul class="pagination">
       <li class="page-item">
         <a{% if page_before %} href="{% url "posts" page|add:"-1" %}?q={{ query|urlencode }}"{% endif %}

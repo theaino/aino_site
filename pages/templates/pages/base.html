@@ -1,7 +1,7 @@
 {% load compress %}
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +10,7 @@
 		<script src="https://kit.fontawesome.com/7aaeea235c.js" crossorigin="anonymous"></script>
 		<script async src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS_CHTML"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
 		{% compress css %}
 		<link type="text/x-scss" href="{% static "styles/style.scss" %}" rel="stylesheet" media="screen">
 		<link type="text/css" href="{% static "styles/pygments.css" %}" rel="stylesheet" media="screen">
@@ -37,6 +38,7 @@
 	{% compress js %}
 	<script type="text/javascript" src="{% static "bootstrap/dist/js/bootstrap.bundle.min.js" %}"></script>
 	<script type="text/javascript" src="{% static "scripts/script.js" %}"></script>
+	<script type="text/javascript" src="{% static "scripts/theme.js" %}"></script>
 	{% block js %}
 	{% endblock %}
 	{% endcompress %}
