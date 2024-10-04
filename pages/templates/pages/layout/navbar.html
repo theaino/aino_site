@@ -3,7 +3,7 @@
 	<div class="navbar-brand flex-fill d-flex align-items-center">
 		<a class="text-reset text-decoration-none" href="{% url "home" %}">
 			<div class="me-auto">
-				Aino&nbsp;
+				Aino
 			</div>
 		</a>
 	</div>
@@ -18,19 +18,20 @@
       {% endfor %}
     </ul>
   </div>
-  <div class="collapse navbar-collapse flex-fill navbar-collapsed-item">
-    <ul class="navbar-nav ms-auto">
-      <li class="nav-item">
+	<div class="collapse navbar-collapse flex-fill navbar-collapsed-item">
+		<ul class="navbar-nav ms-auto">
+			<li class="nav-item">
 				{% if user.is_superuser %}
 				<form method="post" action="{% url 'admin:logout' %}?next=%2F">
 					{% csrf_token %}
 					<button class="nav-link text-danger" type="submit">Logout</button>
 				</form>
-				{% else %}
-				<div id="theme-toggle" class="nav-link" style="cursor: pointer"><i class="fa-solid fa-circle-half-stroke"></i></div>
-        <!--a class="nav-link text-secondary" href="{{ CONTACT.github }}">GitHub <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a-->
 				{% endif %}
-        </li>
+			</li>
+			<li class="nav-item">
+				<div id="theme-toggle" class="nav-link" style="cursor: pointer"><i class="fa-solid fa-circle-half-stroke"></i></div>
+			</li>
+			<!--a class="nav-link text-secondary" href="{{ CONTACT.github }}">GitHub <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a-->
     </ul>
   </div>
 
