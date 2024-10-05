@@ -11,7 +11,7 @@ $(() => {
 
 	let toggle = $("#theme-toggle");
 	toggle.on("click", () => {
-		console.log(theme);
+		
 		theme = theme == "dark" ? "light" : "dark";
 		set_theme(theme);
 	});
