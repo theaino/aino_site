@@ -6,14 +6,14 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0004_router'),
+        ("pages", "0004_router"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='router',
-            name='name',
-            field=models.CharField(default='File', max_length=255),
+            model_name="router",
+            name="name",
+            field=models.CharField(default="File", max_length=255),
             preserve_default=False,
         ),
     ]

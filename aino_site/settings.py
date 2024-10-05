@@ -48,75 +48,73 @@ SHOW_LIKES = False
 PYGMENTS_CSS_CLASS = "source-code-highlight"
 PYGMENTS_HIGHTLIGHT_THEME = "gruvbox-dark"  # https://pygments.org/styles/
 PYGMENTS_FORMATTER = pygments.formatters.HtmlFormatter(
-        cssclass=PYGMENTS_CSS_CLASS,
-        style=PYGMENTS_HIGHTLIGHT_THEME,
-        linenos="inline",
-        wrapcode=True
-        )
+    cssclass=PYGMENTS_CSS_CLASS,
+    style=PYGMENTS_HIGHTLIGHT_THEME,
+    linenos="inline",
+    wrapcode=True,
+)
 
 MARKDOWNX_UPLOAD_CONTENT_TYPES = []
 MARKDOWNX_MARKDOWN_EXTENSIONS = [
-        "extra",
-        "fenced_code",
-        "codehilite",
-        "mdx_math",
-        "pymdownx.emoji",
-        "md_ext.image"
-        ]
+    "extra",
+    "fenced_code",
+    "codehilite",
+    "mdx_math",
+    "pymdownx.emoji",
+    "md_ext.image",
+]
 MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
-        "codehilite": {
-            "pygments_formatter": lambda *_args, **_kwargs: PYGMENTS_FORMATTER
-            }
-        }
+    "codehilite": {"pygments_formatter": lambda *_args, **_kwargs: PYGMENTS_FORMATTER}
+}
 
 
 # Application definition
 
 INSTALLED_APPS = [
-        "webpack_loader",
-        #"compressor",
-        "django.contrib.admin",
-        "django.contrib.auth",
-        "django.contrib.contenttypes",
-        "django.contrib.sessions",
-        "django.contrib.messages",
-        "django.contrib.staticfiles",
-        "markdownx",
-        "pages.apps.PagesConfig",
-        ]
+    "webpack_loader",
+    # "compressor",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "markdownx",
+    "pages.apps.PagesConfig",
+]
 
 MIDDLEWARE = [
-        "django.middleware.security.SecurityMiddleware",
-        "django.contrib.sessions.middleware.SessionMiddleware",
-        "django.middleware.common.CommonMiddleware",
-        "django.middleware.csrf.CsrfViewMiddleware",
-        "django.contrib.auth.middleware.AuthenticationMiddleware",
-        "django.contrib.messages.middleware.MessageMiddleware",
-        "django.middleware.clickjacking.XFrameOptionsMiddleware",
-        ]
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+]
 
 ROOT_URLCONF = "aino_site.urls"
 
 TEMPLATES = [
-        {
-            "BACKEND": "django.template.backends.django.DjangoTemplates",
-            "DIRS": [],
-            "APP_DIRS": True,
-            "OPTIONS": {
-                "context_processors": [
-                    "django.template.context_processors.debug",
-                    "django.template.context_processors.request",
-                    "django.contrib.auth.context_processors.auth",
-                    "django.contrib.messages.context_processors.messages",
-                    "pages.context_processors.load_nav_obj",
-                    "pages.context_processors.load_contact",
-                    "pages.context_processors.load_links",
-                    "pages.context_processors.load_sites",
-                    "pages.context_processors.load_settings"
-                    ],
-                },
-            },
-        ]
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+                "pages.context_processors.load_nav_obj",
+                "pages.context_processors.load_contact",
+                "pages.context_processors.load_links",
+                "pages.context_processors.load_sites",
+                "pages.context_processors.load_settings",
+            ],
+        },
+    },
+]
 
 WSGI_APPLICATION = "aino_site.wsgi.application"
 
@@ -125,34 +123,34 @@ WSGI_APPLICATION = "aino_site.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.mysql",
-            "NAME": get_env("DJANGO_DB_NAME"),
-            "USER": get_env("DJANGO_DB_USER"),
-            "PASSWORD": get_env("DJANGO_DB_PASSWORD"),
-            "HOST": get_env("DJANGO_DB_HOST"),
-            "PORT": get_env("DJANGO_DB_PORT")
-            }
-        }
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": get_env("DJANGO_DB_NAME"),
+        "USER": get_env("DJANGO_DB_USER"),
+        "PASSWORD": get_env("DJANGO_DB_PASSWORD"),
+        "HOST": get_env("DJANGO_DB_HOST"),
+        "PORT": get_env("DJANGO_DB_PORT"),
+    }
+}
 
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-        {
-            "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-            },
-        {
-            "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-            },
-        {
-            "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-            },
-        {
-            "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-            },
-        ]
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
+]
 
 
 # Internationalization
@@ -174,13 +172,13 @@ STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_DIRS = [
-        BASE_DIR / "dist",
-        ]
+    BASE_DIR / "dist",
+]
 
 STATICFILES_FINDERS = [
-        "django.contrib.staticfiles.finders.FileSystemFinder",
-        "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-        ]
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
 
 WEBPACK_LOADER = {
     "DEFAULT": {

@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0001_initial'),
+        ("pages", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='category',
-            options={'verbose_name_plural': 'categories'},
+            name="category",
+            options={"verbose_name_plural": "categories"},
         ),
         migrations.AddField(
-            model_name='post',
-            name='description',
-            field=models.CharField(default='Description', max_length=255),
+            model_name="post",
+            name="description",
+            field=models.CharField(default="Description", max_length=255),
             preserve_default=False,
         ),
     ]

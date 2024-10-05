@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0006_alter_post_body'),
+        ("pages", "0006_alter_post_body"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='post',
-            name='public',
+            model_name="post",
+            name="public",
             field=models.BooleanField(default=True),
             preserve_default=False,
         ),

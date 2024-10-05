@@ -6,15 +6,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0003_remove_post_categories_delete_category'),
+        ("pages", "0003_remove_post_categories_delete_category"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Router',
+            name="Router",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('specifications', models.FileField(upload_to='router_specifications')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("specifications", models.FileField(upload_to="router_specifications")),
             ],
         ),
     ]
