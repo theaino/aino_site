@@ -18,9 +18,8 @@ class Router(models.Model):
 
 @receiver(post_delete, sender=Router)
 def delete_specification_file(_sender, instance, **kwargs):
-    if instance.file:
-        if os.path.isfile(instance.file.path):
-            os.remove(instance.file.path)
+    if instance.file and os.path.isfile(instance.file.path):
+        os.remove(instance.file.path)
 
 
 @receiver(pre_save, sender=Router)
@@ -32,9 +31,12 @@ def delete_old_file_on_update(_sender, instance, **kwargs):
     except Router.DoesNotExist:
         return False
     new_file = instance.file
-    if old_file != new_file:
-        if old_file and os.path.isfile(old_file.path):
-            os.remove(old_file.path)
+    if (
+        old_file != new_file
+        and old_file
+        and os.path.isfile(old_file.path)
+    ):
+        os.remove(old_file.path)
 
 
 class Post(models.Model):
