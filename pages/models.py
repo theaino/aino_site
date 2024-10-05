@@ -31,11 +31,7 @@ def delete_old_file_on_update(_sender, instance, **kwargs):
     except Router.DoesNotExist:
         return False
     new_file = instance.file
-    if (
-        old_file != new_file
-        and old_file
-        and os.path.isfile(old_file.path)
-    ):
+    if old_file != new_file and old_file and os.path.isfile(old_file.path):
         os.remove(old_file.path)
 
 
