@@ -11,7 +11,7 @@ $(() => {
 
   let toggle = $("#theme-toggle");
   toggle.on("click", () => {
-    theme = theme == "dark" ? "light" : "dark";
+    theme = theme === "dark" ? "light" : "dark";
     set_theme(theme);
   });
 });

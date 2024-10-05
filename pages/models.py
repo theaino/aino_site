@@ -17,14 +17,14 @@ class Router(models.Model):
 
 
 @receiver(post_delete, sender=Router)
-def delete_specification_file(sender, instance, **kwargs):
+def delete_specification_file(_sender, instance, **kwargs):
     if instance.file:
         if os.path.isfile(instance.file.path):
             os.remove(instance.file.path)
 
 
 @receiver(pre_save, sender=Router)
-def delete_old_file_on_update(sender, instance, **kwargs):
+def delete_old_file_on_update(_sender, instance, **kwargs):
     if not instance.pk:
         return False
     try:
