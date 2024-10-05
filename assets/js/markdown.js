@@ -3,7 +3,7 @@ const copy_button_label = "Copy";
 $(() => {
 	let elements = $("pre");
 
-	elements.each((idx, element) => {
+	elements.each((_idx, element) => {
 		if (navigator.clipboard) {
 			let button = $("<button></button>");
 			$(element).children("code").after(button);
@@ -28,4 +28,8 @@ $(() => {
 
 		await navigator.clipboard.writeText(text);
 	}
+});
+
+$(() => {
+	$(".markdown a").addClass("text-reset");
 });
