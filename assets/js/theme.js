@@ -1,3 +1,5 @@
+import Cookies from "js-cookie";
+
 function set_theme(value) {
 	$("html").attr("data-bs-theme", value);
 	Cookies.set("theme", value);

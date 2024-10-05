@@ -15,11 +15,11 @@
 
 	<div class="col-1 d-flex justify-content-end">
 		{% if user.is_superuser %}
-		<form method="post" action="{% url 'admin:logout' %}?next=%2F">
+		<form method="post" class="me-4" action="{% url "admin:logout" %}?next=%2F">
 			{% csrf_token %}
-			<button class="text-danger" type="submit">Logout</button>
+    	<a href="#" onclick="this.parentNode.submit();" class="text-danger text-decoration-none">logout</a>
 		</form>
 		{% endif %}
-		<div id="theme-toggle" class="nav-link" style="cursor: pointer"><i class="fa-solid fa-circle-half-stroke"></i></div>
+		<div id="theme-toggle" style="cursor: pointer"><i class="fa-solid fa-circle-half-stroke"></i></div>
 	</div>
 </nav>

@@ -1,0 +1,30 @@
+{
+  "name": "aino_site",
+  "version": "1.0.0",
+  "description": "``` DJANGO_SECRET_KEY DJANGO_DB_NAME DJANGO_DB_HOST DJANGO_DB_PORT DJANGO_DB_USER DJANGO_DB_PASSWORD DJANGO_DEBUG ```",
+  "main": "index.js",
+  "scripts": {
+		"build": "npx webpack --mode=production",
+		"watch": "npx webpack --mode=development --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
+    "css-loader": "^7.1.2",
+    "mini-css-extract-plugin": "^2.9.1",
+    "node-sass": "^9.0.0",
+    "sass-loader": "^16.0.2",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.95.0",
+    "webpack-bundle-tracker": "^3.1.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
+  },
+  "dependencies": {
+    "jquery": "^3.7.1",
+    "js-cookie": "^3.0.5"
+  }
+}

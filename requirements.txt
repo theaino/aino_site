@@ -1,6 +1,5 @@
 django
-django-compressor
-django-libsass
+django-webpack-loader
 django-markdownx
 python-markdown-math
 beautifulsoup4
