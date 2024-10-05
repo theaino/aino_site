@@ -7,13 +7,13 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0005_router_name'),
+        ("pages", "0005_router_name"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='post',
-            name='body',
+            model_name="post",
+            name="body",
             field=markdownx.models.MarkdownxField(),
         ),
     ]

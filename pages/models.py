@@ -22,6 +22,7 @@ def delete_specification_file(sender, instance, **kwargs):
         if os.path.isfile(instance.file.path):
             os.remove(instance.file.path)
 
+
 @receiver(pre_save, sender=Router)
 def delete_old_file_on_update(sender, instance, **kwargs):
     if not instance.pk:
@@ -48,8 +49,9 @@ class Post(models.Model):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.html_body = markdownify(str(self.body))
-        self.words = len(BeautifulSoup(self.html_body, "html.parser")
-                         .get_text().split())
+        self.words = len(
+            BeautifulSoup(self.html_body, "html.parser").get_text().split()
+        )
         self.read_time = self.words // settings.WORDS_PER_MINUTE
 
     def get_absolute_url(self):

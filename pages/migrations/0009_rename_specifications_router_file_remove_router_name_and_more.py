@@ -6,22 +6,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0008_post_like_ips'),
+        ("pages", "0008_post_like_ips"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='router',
-            old_name='specifications',
-            new_name='file',
+            model_name="router",
+            old_name="specifications",
+            new_name="file",
         ),
         migrations.RemoveField(
-            model_name='router',
-            name='name',
+            model_name="router",
+            name="name",
         ),
         migrations.AlterField(
-            model_name='post',
-            name='like_ips',
+            model_name="post",
+            name="like_ips",
             field=models.JSONField(default=dict, editable=False),
         ),
     ]

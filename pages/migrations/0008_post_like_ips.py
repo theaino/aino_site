@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0007_post_public'),
+        ("pages", "0007_post_public"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='post',
-            name='like_ips',
+            model_name="post",
+            name="like_ips",
             field=models.JSONField(default={}, editable=False),
             preserve_default=False,
         ),
