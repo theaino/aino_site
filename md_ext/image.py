@@ -22,7 +22,7 @@ class ImgInlineProcessor(InlineProcessor):
             styles.append(f"height:{height}")
 
         if not (width or height):
-            styles.append(f"width:100%")
+            styles.append("width:100%")
 
         el.set("style", ";".join(styles))
 
