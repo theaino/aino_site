@@ -39,3 +39,7 @@ body {
 .source-code-highlight .copy-code-button:active {
   color: var(--bs-secondary);
 }
+
+table {
+  @extend .table;
+}
