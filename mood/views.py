@@ -4,11 +4,13 @@ from mood.models import Mood
 
 today = localdate
 
+
 def find_mood(date=None):
     if date is None:
         date = today()
     moods = Mood.objects.filter(date=date)
     return None if len(moods) == 0 else moods[0]
+
 
 def index(request):
     if not request.user.is_superuser:
