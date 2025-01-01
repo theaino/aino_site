@@ -22,4 +22,5 @@ urlpatterns = [
     path("markdownx/", include("markdownx.urls")),
     path("admin/", admin.site.urls),
     path("", include("pages.urls")),
+    path("mood/", include("mood.urls")),
 ]
