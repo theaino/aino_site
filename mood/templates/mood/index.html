@@ -1,23 +1,19 @@
-{% extends "pages/base.html" %}
-{% load static %}
+{% extends "pages/base.html" %} {% load static %} {% block title %}Mood{%
+endblock %} {% block content %}
 
-{% block title %}Mood{% endblock %}
-
-{% block content %}
-
-<h1>
-	Select your current mood
-</h1>
+<h1>Select your current mood</h1>
 
 <div class="container">
-	<div class="mood-cards row row-cols-2 justify-content-center">
-		{% for i in "x"|rjust:"12" %}
-			<a href="/mood/{{ forloop.counter }}" class="d-flex justify-content-center align-items-center mood-card mood-color text-reset text-decoration-none col rounded m-1{% if mood is not None and forloop.counter == mood.value %} mood-selected{% endif %}" data-mood="{{ forloop.counter }}">
-			<h1 class="mood-text text-dark">
-				{{ forloop.counter }}
-			</h1>
-			</a>
-		{% endfor %}
-	</div>
+  <div class="mood-cards row row-cols-2 justify-content-center">
+    {% for i in "x"|rjust:"12" %}
+    <a
+      href="/mood/{{ forloop.counter }}"
+      class="d-flex justify-content-center align-items-center mood-card mood-color text-reset text-decoration-none col rounded m-1{% if mood is not None and forloop.counter == mood.value %} mood-selected{% endif %}"
+      data-mood="{{ forloop.counter }}"
+    >
+      <h1 class="mood-text text-dark">{{ forloop.counter }}</h1>
+    </a>
+    {% endfor %}
+  </div>
 </div>
 {% endblock %}
