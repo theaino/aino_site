@@ -54,8 +54,9 @@ $(() => {
 			//red = 255 * (maxMood - mood) / maxMood;
 			//green = 255 * mood / maxMood;
 			//blue = 0;
-			let color = interpRedGreen((maxMood - mood) / maxMood);
-			console.log(color);
+			let t = (maxMood - (mood - 1)) / maxMood;
+			console.log(t);
+			let color = interpRedGreen(t);
 			red = color[0] * 255;
 			green = color[1] * 255;
 			blue = color[2] * 255;
