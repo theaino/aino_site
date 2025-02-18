@@ -8,6 +8,7 @@ import os
 
 NEOLIB_THICKNESS = 0.228125
 
+
 def neolib(request):
     if request.method == "POST":
         file = request.FILES["image"]
@@ -17,12 +18,13 @@ def neolib(request):
         return response
     return render(request, "pfpgen/neolib.html", {})
 
+
 def handle_upload(f):
     image = Image.open(io.BytesIO(f.read())).convert("RGBA")
 
     border_path = os.path.join(settings.STATIC_ROOT, "images/neoli_border.png")
     border = Image.open(border_path).convert("RGBA")
-    
+
     image = image.resize([max(border.size)] * 2)
 
     border_size = int(0.1140625 * image.size[0])
