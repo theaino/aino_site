@@ -1,0 +1,29 @@
+{% extends "pages/base.html" %}
+{% load static %}
+
+{% block title %}Neoliberales Profilbild{% endblock %}
+
+{% block content %}
+<h1>
+  Ein durch Neoliberalismus verfeinertes Profilbild
+</h1>
+<div class="container">
+  <p>
+    Wir brauchen mehr Liberalismus in der Welt. Bis jetzt waren eher die Extremisten beider Seiten in den sozialen Medien präsent - lasset uns das ändern!
+  </p>
+  <h3>
+    Ein eigenes, neoliberales Profilbild generieren
+  </h3>
+  <p>
+    Quelle:
+    <a href="https://www.instagram.com/neoliberale.aktion/">@neoliberale.aktion</a>
+  </p>
+  <div>
+    <form action="{{ request.path }}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input class="form-control mb-2" type="file" name="image" required>
+      <input class="form-control btn btn-primary" type="submit" value="Download">
+    </form>
+  </div>
+</div>
+{% endblock %}

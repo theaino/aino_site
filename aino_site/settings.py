@@ -82,6 +82,7 @@ INSTALLED_APPS = [
     "markdownx",
     "pages.apps.PagesConfig",
     "mood.apps.MoodConfig",
+    "pfpgen.apps.PfpgenConfig",
 ]
 
 MIDDLEWARE = [
@@ -175,6 +176,9 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [
     BASE_DIR / "dist",
 ]
+
+if DEBUG:
+    STATICFILES_DIRS.append("static")
 
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
