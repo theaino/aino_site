@@ -1,0 +1,28 @@
+package views
+
+templ Base() {
+  <!doctype html>
+  <html>
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Aino's site</title>
+      @Style()
+    </head>
+    <body>
+      { children... }
+    </body>
+  </html>
+}
+
+templ Style() {
+  <style>
+    @viewport {
+      width: devicewidth;
+      zoom: 1.0;
+    }
+    body {
+      background-color: black;
+      color: white;
+    }
+  </style>
+}
