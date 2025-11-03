@@ -6,7 +6,7 @@ templ Base() {
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Aino's site</title>
-      @Style()
+      @style()
     </head>
     <body>
       { children... }
@@ -14,15 +14,11 @@ templ Base() {
   </html>
 }
 
-templ Style() {
+templ style() {
   <style>
     @viewport {
       width: devicewidth;
       zoom: 1.0;
-    }
-    body {
-      background-color: black;
-      color: white;
     }
   </style>
 }
