@@ -33,7 +33,7 @@ func main() {
 		sessionKey = base64.RawURLEncoding.EncodeToString(b)
 	}
 	password := os.Getenv("ADM_PASSWD")
-	if sessionKey == "" {
+	if password == "" {
 		log.Fatal("$ADM_PASSWD is not provided")
 	}
 
