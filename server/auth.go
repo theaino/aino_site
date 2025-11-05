@@ -1,4 +1,4 @@
-package main
+package server
 
 import (
 	"net/http"
@@ -18,15 +18,18 @@ func NewAuth(sessionKey, password string) *Auth {
 	}
 }
 
+func (a *Auth) Authed(w http.ResponseWriter, r *http.Request) bool {
+	session, err := a.Store.Get(r, "auth-session")
+	if err != nil {
+		return false
+	}
+	authed, ok := session.Values["authed"].(bool)
+	return authed && ok
+}
+
 func (a *Auth) Middleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		session, err := a.Store.Get(r, "session-name")
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-      return
-		}
-		authed, ok := session.Values["authed"].(bool)
-		if !ok || !authed {
+		if !a.Authed(w, r) {
 			http.Redirect(w, r, "/login", http.StatusFound)
 			return
 		}
@@ -35,13 +38,13 @@ func (a *Auth) Middleware(next http.Handler) http.Handler {
 }
 
 func (a *Auth) Login(w http.ResponseWriter, r *http.Request) {
-	session, _ := a.Store.Get(r, "session-name")
+	session, _ := a.Store.Get(r, "auth-session")
 	session.Values["authed"] = true
 	session.Save(r, w)
 }
 
 func (a *Auth) Logout(w http.ResponseWriter, r *http.Request) {
-	session, _ := a.Store.Get(r, "session-name")
+	session, _ := a.Store.Get(r, "auth-session")
 	session.Values["authed"] = false
 	session.Save(r, w)
 }

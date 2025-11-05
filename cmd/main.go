@@ -1,6 +1,10 @@
 package main
 
 import (
+	"ainosite/server"
+	"crypto/rand"
+	"encoding/base64"
+	"io"
 	"log"
 	"os"
 
@@ -12,7 +16,7 @@ func main() {
 
 	addr := os.Getenv("SERVER_ADDR")
 	if addr == "" {
-		addr = "127.0.0.1:8000"
+		addr = "0.0.0.0:8000"
 	}
 
 	path := os.Getenv("SQLITE_PATH")
@@ -22,14 +26,18 @@ func main() {
 
 	sessionKey := os.Getenv("SESSION_KEY")
 	if sessionKey == "" {
-		log.Fatal("$SESSION_KEY is not provided")
+		b := make([]byte, 32)
+		if _, err := io.ReadFull(rand.Reader, b); err != nil {
+			panic(err)
+		}
+		sessionKey = base64.RawURLEncoding.EncodeToString(b)
 	}
 	password := os.Getenv("ADM_PASSWD")
 	if sessionKey == "" {
 		log.Fatal("$ADM_PASSWD is not provided")
 	}
 
-	d, err := NewDB(path)
+	d, err := server.NewDB(path)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -37,8 +45,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	s := NewServer(d, addr)
-	a := NewAuth(sessionKey, password)
+	s := server.NewServer(d, addr)
+	a := server.NewAuth(sessionKey, password)
 	s.Route(a)
 	if err := s.ListenAndServe(); err != nil {
 		log.Fatal(err)

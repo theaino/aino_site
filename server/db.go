@@ -1,9 +1,9 @@
-package main
+package server
 
 import (
 	"ainosite/models"
 
-	"gorm.io/driver/sqlite"
+	"github.com/glebarez/sqlite"
 	"gorm.io/gorm"
 )
 
@@ -18,6 +18,10 @@ func NewDB(path string) (db *DB, err error) {
 	}
 	db = &DB{conn}
 	return
+}
+
+func G[T any](db *DB) gorm.Interface[T] {
+	return gorm.G[T](db.DB)
 }
 
 func (d DB) Migrate() error {
