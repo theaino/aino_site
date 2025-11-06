@@ -1,0 +1,12 @@
+package adm
+
+import "ainosite/models"
+
+templ Index(moods []models.Mood) {
+  @Layout() {
+    <h1>Administration</h1>
+    <a href="/adm/mood">Set mood</a>
+    <hr/>
+    @moodTimeline(moods)
+  }
+}

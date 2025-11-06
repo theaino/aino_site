@@ -1,0 +1,20 @@
+package pub
+
+import "ainosite/views"
+
+templ Layout() {
+  @views.Base() {
+    <!--<a href="/">Home</a>-->
+    { children... }
+    @style()
+  }
+}
+
+templ style() {
+  <style>
+    body {
+      background-color: black;
+      color: white;
+    }
+  </style>
+}

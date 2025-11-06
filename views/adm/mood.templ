@@ -1,0 +1,105 @@
+package adm
+
+import "strconv"
+import "ainosite/models"
+import "time"
+import "github.com/lucasb-eyer/go-colorful"
+
+templ moodTimeline(moods []models.Mood) {
+  {{
+    startDay := time.Now()
+    if len(moods) > 0 {
+      moodPadding := int(moods[0].Date.Weekday() - 1) % 7
+      startDay = moods[0].Date.AddDate(0, 0, -moodPadding)
+    }
+  }}
+  {{ moodIdx := 0 }}
+  <div class="mood-grid">
+    if len(moods) > 0 {
+      for day := startDay; day.Before(moods[len(moods)-1].Date.AddDate(0, 0, 1)); day = day.AddDate(0, 0, 1) {
+        if moods[moodIdx].Date.Year() == day.Year() && moods[moodIdx].Date.YearDay() == day.YearDay() {
+          <div class="mood" style={ "background-color: " + moodColor(moods[moodIdx].Value) }>
+            <b>{ moods[moodIdx].Value }</b>
+          </div>
+          {{ moodIdx++ }}
+        } else {
+          <div class="mood" style="background-color: gray"></div>
+        }
+      }
+    }
+  </div>
+  <style>
+    div.mood {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: black;
+      width: 50px;
+      height: 50px;
+    }
+    div.mood-grid {
+      width: fit-content;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+    }
+  </style>
+}
+
+templ Mood(mood models.Mood) {
+  @Layout() {
+    <h1>{ mood.Date.Format("Mon, 02.01.2006") }</h1>
+    <a href="/adm">Index</a>
+    <hr/>
+    <div class="mood-grid">
+      for value := 1; value < 13; value++ {
+        <a href={ "/adm/mood/" + mood.Date.Format(models.DateFormat) + "/set/" + strconv.Itoa(value) }>
+          {{ class := "mood" }}
+          {{ if mood.Value == value { class += " selected" } }}
+          <button class={ class } style={ "background-color: " + moodColor(value) }>
+            <b>{ value }</b>
+          </button>
+        </a>
+      }
+    </div>
+    <hr/>
+    <a href={ "/adm/mood/" + mood.Date.AddDate(0, 0, -1).Format(models.DateFormat) }>Yesterday</a>
+    <a href={ "/adm/mood/" + time.Now().Format(models.DateFormat) }>Now</a>
+    <a href={ "/adm/mood/" + mood.Date.AddDate(0, 0, 1).Format(models.DateFormat) }>Tomorrow</a>
+    <style>
+      button.mood {
+        width: 50px;
+        height: 50px;
+        border-radius: 0;
+        border: none;
+        margin: 2px;
+      }
+      button.mood.selected {
+        border-style: solid !important;
+        border-color: gray;
+      }
+      div.mood-grid {
+        margin: 0 auto;
+      }
+      @media only screen and (max-width: 768px) {
+        button.mood {
+          width: 100px;
+          height: 100px;
+          border-width: 5px;
+        }
+        div.mood-grid {
+          width: fit-content;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          grid-template-rows: repeat(4, 1fr);
+        }
+      }
+    </style>
+  }
+}
+
+func moodColor(value int) string {
+  red, _ := colorful.Hex("#ff0000")
+  green, _ := colorful.Hex("#00ff00")
+  return red.BlendHsv(green, float64(value - 1) / 11).Hex()
+}
+
