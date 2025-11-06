@@ -5,15 +5,5 @@ import "ainosite/views"
 templ Layout() {
   @views.Base() {
     { children... }
-    @style()
   }
-}
-
-templ style() {
-  <style>
-    body {
-      background-color: black;
-      color: white;
-    }
-  </style>
 }

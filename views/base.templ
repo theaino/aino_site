@@ -5,6 +5,7 @@ templ Base() {
   <html>
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="icon" type="image/x-icon" href="/res/favicon.ico">
       <title>Aino's site</title>
       @style()
     </head>
@@ -19,6 +20,13 @@ templ style() {
     @viewport {
       width: devicewidth;
       zoom: 1.0;
+    }
+    body {
+      background-color: black;
+      color: white;
+    }
+    a:visited {
+      color:blue;
     }
   </style>
 }
