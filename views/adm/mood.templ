@@ -7,22 +7,24 @@ import "github.com/lucasb-eyer/go-colorful"
 
 templ moodTimeline(moods []models.Mood) {
   {{
-    moodPadding := 0
+    startDay := time.Now()
     if len(moods) > 0 {
-      moodPadding = int(moods[0].Date.Weekday() - 1) % 7
+      moodPadding := int(moods[0].Date.Weekday() - 1) % 7
+      startDay = moods[0].Date.AddDate(0, 0, -moodPadding)
     }
-    startDay := moods[0].Date.AddDate(0, 0, -moodPadding)
   }}
   {{ moodIdx := 0 }}
   <div class="mood-grid">
-    for day := startDay; day.Before(moods[len(moods)-1].Date.AddDate(0, 0, 1)); day = day.AddDate(0, 0, 1) {
-      if moods[moodIdx].Date.Year() == day.Year() && moods[moodIdx].Date.YearDay() == day.YearDay() {
-        <div class="mood" style={ "background-color: " + moodColor(moods[moodIdx].Value) }>
-          <b>{ moods[moodIdx].Value }</b>
-        </div>
-        {{ moodIdx++ }}
-      } else {
-        <div class="mood" style="background-color: gray"></div>
+    if len(moods) > 0 {
+      for day := startDay; day.Before(moods[len(moods)-1].Date.AddDate(0, 0, 1)); day = day.AddDate(0, 0, 1) {
+        if moods[moodIdx].Date.Year() == day.Year() && moods[moodIdx].Date.YearDay() == day.YearDay() {
+          <div class="mood" style={ "background-color: " + moodColor(moods[moodIdx].Value) }>
+            <b>{ moods[moodIdx].Value }</b>
+          </div>
+          {{ moodIdx++ }}
+        } else {
+          <div class="mood" style="background-color: gray"></div>
+        }
       }
     }
   </div>

@@ -19,10 +19,8 @@ func main() {
 		addr = "0.0.0.0:8000"
 	}
 
-	path := os.Getenv("SQLITE_PATH")
-	if path == "" {
-		path = "site.db"
-	}
+	sqlitePath := os.Getenv("SQLITE_PATH")
+	mysqlDsn := os.Getenv("MYSQL_DSN")
 
 	sessionKey := os.Getenv("SESSION_KEY")
 	if sessionKey == "" {
@@ -37,7 +35,15 @@ func main() {
 		log.Fatal("$ADM_PASSWD is not provided")
 	}
 
-	d, err := server.NewDB(path)
+	d := server.NewDB()
+	var err error
+	if sqlitePath == "" && mysqlDsn == "" {
+		err = d.OpenSqlite("site.db")
+	} else if sqlitePath != "" {
+		err = d.OpenSqlite(sqlitePath)
+	} else {
+		err = d.OpenMysql(mysqlDsn)
+	}
 	if err != nil {
 		log.Fatal(err)
 	}
