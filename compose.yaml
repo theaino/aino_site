@@ -1,0 +1,8 @@
+services:
+  aino_site:
+    build: .
+    restart: always
+    environment:
+      SERVER_ADDR: "0.0.0.0:8080"
+    ports:
+      - "8080:8080"
