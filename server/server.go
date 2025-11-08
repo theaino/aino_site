@@ -1,6 +1,7 @@
 package server
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
@@ -22,6 +23,7 @@ func NewServer(db *DB, addr string) *Server {
 
 
 func (s *Server) ListenAndServe() error {
+	log.Printf("Listening on %v...", s.Addr)
 	return http.ListenAndServe(s.Addr, s.Router)
 }
 
