@@ -56,6 +56,22 @@ func (s *Server) Route(auth *Auth) {
 			http.Redirect(w, r, "/adm/mood/" + time.Now().Format(models.DateFormat), http.StatusFound)
 		})
 
+		r.Get("/mood.json", func(w http.ResponseWriter, r *http.Request) {
+			ctx := context.Background()
+			moods, err := G[models.Mood](s.DB).Order("date").Find(ctx)
+			if err != nil {
+				w.WriteHeader(http.StatusInternalServerError)
+				return
+			}
+			data, err := adm.RawMood(moods)
+			if err != nil {
+				w.WriteHeader(http.StatusInternalServerError)
+				return
+			}
+			w.Header().Add("Content-Type", "application/json")
+			w.Write(data)
+		})
+
 		r.Get("/mood/{date}", func(w http.ResponseWriter, r *http.Request) {
 			date, err := time.Parse(models.DateFormat, chi.URLParam(r, "date"))
 			if err != nil {
