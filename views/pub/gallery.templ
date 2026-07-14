@@ -1,0 +1,37 @@
+package pub
+
+templ Gallery() {
+  @Layout() {
+    <a href="/">(back to home)</a>
+    <div>
+      <h1 style="display: inline-block">Aino's cheap on-line gallery</h1>
+      <span style="display: inline-block">&nbsp;(still expanding...)</span>
+    </div>
+
+    <figure style="display: inline-block">
+      <img src="/res/imgs/block_winter.jpg" width="300"/>
+      <figcaption><i>Block in winter</i>, Feb 26</figcaption>
+    </figure>
+
+    <figure style="display: inline-block">
+      <img src="/res/imgs/movement.png" style="max-height: 400px"/>
+      <figcaption><i>Movement</i>, new year's eve 25</figcaption>
+    </figure>
+
+    <figure style="display: inline-block">
+      <img src="/res/imgs/flashed.png" width="300"/>
+      <figcaption><i>Flashed</i>, Q4 25</figcaption>
+    </figure>
+
+    <figure style="display: inline-block">
+      <img src="/res/imgs/ref_win.png" style="max-height: 400px"/>
+      <figcaption><i>Reflected window</i>, Q3 25</figcaption>
+    </figure>
+
+    <style>
+      img {
+        max-width: 100%;
+      }
+    </style>
+  }
+}

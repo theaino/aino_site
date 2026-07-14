@@ -23,6 +23,11 @@ func (s *Server) Route(auth *Auth) {
 		pub.Index().Render(context.Background(), w)
 	})
 
+	s.Router.Get("/gallery", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		pub.Gallery().Render(context.Background(), w)
+	})
+
 	s.Router.Get("/login", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		pub.Login().Render(context.Background(), w)

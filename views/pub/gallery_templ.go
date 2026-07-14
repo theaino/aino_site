@@ -8,7 +8,7 @@ package pub
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func Index() templ.Component {
+func Gallery() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -41,7 +41,7 @@ func Index() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<h1>Aino on the Interweb</h1><p>My presence on the global network. Aino is pronounced <i>eye-no</i>.</p><p>I do not like all this fancy web stuff everybody uses, so this is just plain <a href=\"https://github.com/theaino/aino_site\">HTML and Go</a>. It's also not as much work for me xD.</p><h3>Contact</h3><p><ul><li>Email: info (at) aino-spring (dot) com (<a href=\"https://keys.openpgp.org/vks/v1/by-fingerprint/7EA40D63698A041361DD3080A2F15C351B9CB710\">PGP key</a>)</li><li>XMPP: aino (at) aino-spring (dot) com</li><li>Codeberg: <a href=\"https://codeberg.org/theaino\">&#64;theaino</a> (recently tried it out, looks better than github)</li><li>GitHub: <a href=\"https://github.com/theaino\">&#64;theaino</a></li></ul></p><p>I share my current book progress on <a href=\"https://www.goodreads.com/user/show/202602472-aino-spring\">goodreads</a>, for those interested.</p><p>I'm also doing some <a href=\"/gallery\">photography</a>. Don't expect much though.</p><h3>Things I support (and you should too)</h3><p><ul><li><a href=\"https://publiccode.eu\">publiccode.eu</a></li><li><a href=\"https://fightchatcontrol.eu\">fightchatcontrol.eu</a></li><li><a href=\"https://motherfuckingwebsite.com\">The excuse I use for this site's design</a></li></ul></p><h3>Objectively evil things</h3><ul><li>EU Chat Control – fuck y'all, <a href=\"https://europeanconservative.com/articles/commentary/chat-control-eu-parliament-unable-to-stop-chat-control-extension\">this ain't democracy</a></li><li>Javascript (this site uses 0%)</li></ul>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<a href=\"/\">(back to home)</a><div><h1 style=\"display: inline-block\">Aino's cheap on-line gallery</h1><span style=\"display: inline-block\">&nbsp;(still expanding...)</span></div><figure style=\"display: inline-block\"><img src=\"/res/imgs/block_winter.jpg\" width=\"300\"><figcaption><i>Block in winter</i>, Feb 26</figcaption></figure><figure style=\"display: inline-block\"><img src=\"/res/imgs/movement.png\" style=\"max-height: 400px\"><figcaption><i>Movement</i>, new year's eve 25</figcaption></figure><figure style=\"display: inline-block\"><img src=\"/res/imgs/flashed.png\" width=\"300\"><figcaption><i>Flashed</i>, Q4 25</figcaption></figure><figure style=\"display: inline-block\"><img src=\"/res/imgs/ref_win.png\" style=\"max-height: 400px\"><figcaption><i>Reflected window</i>, Q3 25</figcaption></figure><style>\n      img {\n        max-width: 100%;\n      }\n    </style>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
