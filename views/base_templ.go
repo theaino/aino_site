@@ -74,7 +74,7 @@ func style() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<style>\n    @viewport {\n      width: devicewidth;\n      zoom: 1.0;\n    }\n    body {\n      background-color: black;\n      color: white;\n    }\n    a:visited {\n      color:blue;\n    }\n  </style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<style>\n    @viewport {\n      width: devicewidth;\n      zoom: 1.0;\n    }\n    body {\n      background-color: black;\n      color: white;\n    }\n    a {\n      color:lightblue;\n    }\n  </style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
