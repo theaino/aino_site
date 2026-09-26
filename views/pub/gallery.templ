@@ -9,33 +9,40 @@ templ Gallery() {
     </div>
 
     <figure style="display: inline-block">
-      <img src="/res/imgs/darktunnel.png" width="300"/>
+      <img src="/res/imgs/darktunnel.png" class="vert"/>
       <figcaption><i>Tunnel</i>, Jul 26</figcaption>
     </figure>
 
     <figure style="display: inline-block">
-      <img src="/res/imgs/block_winter.jpg" width="300"/>
+      <img src="/res/imgs/block_winter.jpg" class="vert"/>
       <figcaption><i>Block in winter</i>, Feb 26</figcaption>
     </figure>
 
     <figure style="display: inline-block">
-      <img src="/res/imgs/movement.png" style="max-height: 400px"/>
+      <img src="/res/imgs/movement.png" class="hor"/>
       <figcaption><i>Movement</i>, New year's eve 25</figcaption>
     </figure>
 
     <figure style="display: inline-block">
-      <img src="/res/imgs/flashed.png" width="300"/>
+      <img src="/res/imgs/flashed.png" class="vert"/>
       <figcaption><i>Flashed</i>, Q4 25</figcaption>
     </figure>
 
     <figure style="display: inline-block">
-      <img src="/res/imgs/ref_win.png" style="max-height: 400px"/>
+      <img src="/res/imgs/ref_win.png" class="hor"/>
       <figcaption><i>Reflected window</i>, Q3 25</figcaption>
     </figure>
 
     <style>
       img {
         max-width: 100%;
+        border: grey 3px solid;
+      }
+      img.hor {
+        max-height: 400px;
+      }
+      img.vert {
+        width: 300px;
       }
     </style>
   }
